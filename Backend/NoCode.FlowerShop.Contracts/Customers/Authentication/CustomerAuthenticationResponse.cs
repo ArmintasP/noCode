@@ -1,6 +1,6 @@
 ﻿namespace NoCode.FlowerShop.Contracts.Customers.Authentication;
 
 public record CustomerAuthenticationResponse(
-    int Id,
+    Guid Id,
     string Email,
     string Token);
