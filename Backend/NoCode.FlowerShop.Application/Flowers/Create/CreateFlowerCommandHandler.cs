@@ -18,17 +18,11 @@ public sealed class CreateFlowerCommandHandler
 
     public async Task<ErrorOr<CreateFlowerResult>> Handle(CreateFlowerCommand request, CancellationToken cancellationToken)
     {
-        List<Error> errors = new();
-
-        bool isUniqueName = await IsUniqueName(request.Name);
+        var isUniqueName = await IsUniqueName(request.Name);
         if (!isUniqueName)
-        {
-            errors.Add(Errors.Flowers.DuplicateName);
-        }
-        
-        if (errors.Count > 0) return errors;
+            return Errors.Flowers.DuplicateName;
 
-        Flower flowerToCreate = new(request.Name, request.ImageUrl);
+        var flowerToCreate = new Flower(request.Name, request.ImageUrl);
 
         var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, CancellationToken.None);
 

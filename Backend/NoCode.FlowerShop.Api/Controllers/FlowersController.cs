@@ -21,11 +21,14 @@ public class FlowersController : ApiController
     }
 
     [HttpPost("")]
-    [AuthorizeRoles(UserRole.Administrator)]
+    //[AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> Create(CreateFlowerRequest request)
     {
         var query = _mapper.Map<CreateFlowerCommand>(request);
         var result = await _mediator.Send(query);
-        return result.Match(Ok, Problem);
+        
+        return result.Match(
+            result => Ok(_mapper.Map<CreateFlowerResponse>(result)),
+            errors => Problem(errors));
     }
 }

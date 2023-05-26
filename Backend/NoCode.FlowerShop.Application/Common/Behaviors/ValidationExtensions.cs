@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace NoCode.FlowerShop.Application.Common.Behaviors;
 
-public static class ValidationExtensions
+public static partial class ValidationExtensions
 {
     public static IRuleBuilderOptionsConditions<T, string> Password<T>(this IRuleBuilder<T, string> ruleBuilder, int minLength = 8, int maxLength = 32)
     {
@@ -31,12 +31,13 @@ public static class ValidationExtensions
             const string pattern 
                 = @"^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$";
 
-            var regex = new Regex(pattern);
+            var regex = MyRegex();
 
-            if (!regex.IsMatch(url))
-            {
+            if (!regex.IsMatch(url)) 
                 context.AddFailure("The URL is not valid.");
-            }
-        });
+            });
     }
+
+    [GeneratedRegex("^[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$")]
+    private static partial Regex MyRegex();
 }
