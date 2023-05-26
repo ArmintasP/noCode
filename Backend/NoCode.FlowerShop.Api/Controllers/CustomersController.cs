@@ -19,7 +19,7 @@ public class CustomersController : ApiController
         _mapper = mapper;
         _mediator = mediator;
     }
-    
+
     [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register(CustomerRegisterRequest request)
@@ -31,8 +31,8 @@ public class CustomersController : ApiController
             result => Ok(_mapper.Map<CustomerAuthenticationResponse>(result)),
             errors => Problem(errors));
     }
-    
-    [HttpGet("login")]
+
+    [HttpPost("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(CustomerLoginRequest request)
     {
