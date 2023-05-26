@@ -8,10 +8,10 @@ public class FlowerArrangementCategoryConfiguration : IEntityTypeConfiguration<F
 {
     public void Configure(EntityTypeBuilder<FlowerArrangementCategory> builder)
     {
-        ConfigureCustomersTable(builder);
+        ConfigureFlowerArrangementCategoriesTable(builder);
     }
 
-    private static void ConfigureCustomersTable(EntityTypeBuilder<FlowerArrangementCategory> builder)
+    private static void ConfigureFlowerArrangementCategoriesTable(EntityTypeBuilder<FlowerArrangementCategory> builder)
     {
         builder.ToTable("FlowersArrangementCategories");
         builder.HasKey(c => c.Id);
