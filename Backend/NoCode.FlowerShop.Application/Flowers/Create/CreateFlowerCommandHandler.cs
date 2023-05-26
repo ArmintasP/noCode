@@ -2,6 +2,7 @@ using ErrorOr;
 using MediatR;
 using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Domain;
+using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
 namespace NoCode.FlowerShop.Application.Flowers.Create;
 
@@ -19,15 +20,24 @@ public sealed class CreateFlowerCommandHandler
     {
         List<Error> errors = new();
 
+        bool isUniqueName = await IsUniqueName(request.Name);
+        if (!isUniqueName)
+        {
+            errors.Add(Errors.Flowers.DuplicateName);
+        }
+        
         if (errors.Count > 0) return errors;
 
-        Flower flowerToCreate = new(
-            name: request.Name, 
-            imageUrl: request.ImageUrl);
+        Flower flowerToCreate = new(request.Name, request.ImageUrl);
 
-        var createdFlower = await _flowerRepository
-            .AddAsync(flowerToCreate, CancellationToken.None);
+        var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, CancellationToken.None);
 
         return new CreateFlowerResult(createdFlower);
+    }
+
+    private async Task<bool> IsUniqueName(string name)
+    {
+        var flower = await _flowerRepository.GetByNameAsync(name);
+        return flower is null;
     }
 }

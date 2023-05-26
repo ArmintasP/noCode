@@ -1,5 +1,5 @@
 using FluentValidation;
-using NoCode.FlowerShop.Application.Common.Validators;
+using NoCode.FlowerShop.Application.Common.Behaviors;
 
 namespace NoCode.FlowerShop.Application.Flowers.Create;
 
@@ -11,6 +11,6 @@ public class CreateFlowerValidator : AbstractValidator<CreateFlowerCommand>
             .NotEmpty();
 
         RuleFor(x => x.ImageUrl)
-            .Must(ValidationHelpers.BeValidUrl);
+            .ValidUrl();
     }
 }

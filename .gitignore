@@ -8,7 +8,3 @@ Backend/.idea/.idea.NoCode.FlowerShop/.idea/encodings.xml
 Backend/.idea/.idea.NoCode.FlowerShop/.idea/indexLayout.xml
 Backend/.idea/.idea.NoCode.FlowerShop/.idea/misc.xml
 Backend/.idea/.idea.NoCode.FlowerShop/.idea/vcs.xml
-*.db
-Database/FlowerShop.db
-*.db-shm
-*.db-wal

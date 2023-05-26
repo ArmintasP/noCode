@@ -1,8 +1,10 @@
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NoCode.FlowerShop.Api.Attributes;
 using NoCode.FlowerShop.Application.Flowers.Create;
 using NoCode.FlowerShop.Contracts.Flowers;
+using NoCode.FlowerShop.Domain.Common;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
@@ -19,6 +21,7 @@ public class FlowersController : ApiController
     }
 
     [HttpPost("")]
+    //[AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> Create(CreateFlowerRequest request)
     {
         var query = _mapper.Map<CreateFlowerCommand>(request);
