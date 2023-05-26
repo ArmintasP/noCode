@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Api.Attributes;
 using NoCode.FlowerShop.Application.Flowers.Create;
+using NoCode.FlowerShop.Application.Flowers.Delete;
 using NoCode.FlowerShop.Contracts.Flowers;
 using NoCode.FlowerShop.Domain.Common;
 
@@ -24,11 +25,23 @@ public class FlowersController : ApiController
     [AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> Create(CreateFlowerRequest request)
     {
-        var query = _mapper.Map<CreateFlowerCommand>(request);
-        var result = await _mediator.Send(query);
+        var command = _mapper.Map<CreateFlowerCommand>(request);
+        var result = await _mediator.Send(command);
         
         return result.Match(
             result => Ok(_mapper.Map<CreateFlowerResponse>(result)),
+            errors => Problem(errors));
+    }
+
+    [HttpDelete("{id:guid}")]
+    [AuthorizeRoles(UserRole.Administrator)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeleteFlowerCommand(id);
+        var result = await _mediator.Send(command);
+        
+        return result.Match(
+            result => Ok(_mapper.Map<DeleteFlowerResponse>(result)),
             errors => Problem(errors));
     }
 }
