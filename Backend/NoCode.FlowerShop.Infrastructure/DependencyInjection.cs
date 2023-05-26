@@ -42,6 +42,7 @@ public static class DependencyInjection
         services.AddScoped<IFlowerRepository, FlowerRepository>();
         services.AddScoped<IFlowerArrangementRepository, FlowerArrangementRepository>();
         services.AddScoped<IFlowerArrangementCategoryRepository, FlowerArrangementCategoryRepository>();
+        services.AddScoped<ICartRepository, CartRepository>();
 
         return services;
     }

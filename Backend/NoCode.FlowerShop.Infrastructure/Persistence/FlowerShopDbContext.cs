@@ -13,6 +13,7 @@ public class FlowerShopDbContext : DbContext
     public DbSet<Flower> Flowers { get; set; } = null!;
     public DbSet<FlowerArrangement> FlowerArrangements { get; set; } = null!;
     public DbSet<FlowerArrangementCategory> FlowerArrangementCategories { get; set; } = null!;
+    public DbSet<Cart> Carts { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
