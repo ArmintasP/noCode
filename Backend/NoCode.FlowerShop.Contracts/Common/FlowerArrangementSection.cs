@@ -1,4 +1,5 @@
 ﻿namespace NoCode.FlowerShop.Contracts.Common;
+
 public sealed record FlowerArrangementSection(
     Guid Id,
     string Name,

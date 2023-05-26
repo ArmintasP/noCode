@@ -30,6 +30,4 @@ public class FlowerArrangementsController : ApiController
             result => Ok(_mapper.Map<AvailableFlowerArrangementsResponse>(result)),
             errors => Problem(errors));
     }
-
 }
-
