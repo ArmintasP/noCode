@@ -9,6 +9,7 @@ public class FlowerShopDbContext : DbContext
         : base(options) { }
 
     public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<Administrator> Administrators { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
