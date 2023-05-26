@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
+using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
 using NoCode.FlowerShop.Contracts.Common;
 using NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
 using NoCode.FlowerShop.Domain;
@@ -18,5 +19,8 @@ public sealed class FlowerArrangementsMapping : IRegister
 
         config.NewConfig<Flowers, FlowerSection>()
             .Map(dest => dest, src => src.Flower);
+
+        config.NewConfig<GetFlowerArrangementByIdResult, GetFlowerArrangementByIdResponse>()
+            .Map(dest => dest, src => src.FlowerArrangement);
     }
 }
