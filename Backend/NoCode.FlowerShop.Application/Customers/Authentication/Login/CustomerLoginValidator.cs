@@ -7,7 +7,7 @@ public sealed class CustomerLoginValidator : AbstractValidator<CustomerLoginQuer
     public CustomerLoginValidator()
     {
         RuleFor(x => x.Email).EmailAddress();
-        
+
         RuleFor(x => x.Password).NotEmpty();
     }
 }

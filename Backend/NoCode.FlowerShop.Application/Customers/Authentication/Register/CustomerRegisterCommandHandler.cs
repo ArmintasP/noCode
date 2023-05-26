@@ -39,7 +39,7 @@ public sealed class CustomerRegisterCommandHandler :
             request.Email,
             hashedPassword,
             salt);
-        
+
         await _customerRepository.AddAsync(customer);
 
         var token = _jwtTokenGenerator.GenerateToken(customer);

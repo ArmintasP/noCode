@@ -12,13 +12,13 @@ public sealed class CustomerRepository : ICustomerRepository
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task AddAsync(Customer customer, CancellationToken token = default)
     {
         await _dbContext.AddAsync(customer, token);
         await _dbContext.SaveChangesAsync(token);
     }
-    
+
     public Task<Customer?> GetCustomerByEmailAsync(string email, CancellationToken token = default)
     {
         return _dbContext.Customers.SingleOrDefaultAsync(c => c.Email == email, token);
