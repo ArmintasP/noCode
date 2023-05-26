@@ -21,7 +21,7 @@ public class FlowersController : ApiController
     }
 
     [HttpPost("")]
-    //[AuthorizeRoles(UserRole.Administrator)]
+    [AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> Create(CreateFlowerRequest request)
     {
         var query = _mapper.Map<CreateFlowerCommand>(request);
