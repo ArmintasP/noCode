@@ -10,6 +10,9 @@ public class FlowerShopDbContext : DbContext
 
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<Administrator> Administrators { get; set; } = null!;
+    public DbSet<Flower> Flowers { get; set; } = null!;
+    public DbSet<FlowerArrangement> FlowerArrangements { get; set; } = null!;
+    public DbSet<FlowerArrangementCategory> FlowerArrangementCategories { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
