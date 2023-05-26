@@ -13,10 +13,12 @@ public sealed class FlowerRepository : IFlowerRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddAsync(Flower flower, CancellationToken token = default)
+    public async Task<Flower> AddAsync(Flower flower, CancellationToken token = default)
     {
-        await _dbContext.AddAsync(flower, token);
+        var createdFlower = await _dbContext.AddAsync(flower, token);
         await _dbContext.SaveChangesAsync(token);
+
+        return createdFlower.Entity;
     }
 
     public IQueryable<Flower> GetAll()
