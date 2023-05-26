@@ -5,8 +5,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NoCode.FlowerShop.Application.Common.Interfaces.Authentication;
 using NoCode.FlowerShop.Application.Common.Interfaces.Clock;
+using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Infrastructure;
 using NoCode.FlowerShop.Infrastructure.Authentication;
+using NoCode.FlowerShop.Infrastructure.Persistence;
 using NoCode.FlowerShop.Infrastructure.Time;
 using System.Text;
 
@@ -28,6 +30,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddPersistence(this IServiceCollection services)
     {
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
         return services;
     }
 
