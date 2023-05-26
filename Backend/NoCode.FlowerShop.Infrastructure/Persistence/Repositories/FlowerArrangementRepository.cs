@@ -20,12 +20,20 @@ public sealed class FlowerArrangementRepository : IFlowerArrangementRepository
 
     public Task<List<FlowerArrangement>> GetAllAsync(CancellationToken token = default)
     {
-        return _dbContext.FlowerArrangements.ToListAsync(token);
+        return _dbContext.FlowerArrangements
+            .Include(f => f.FlowerArrangementCategory)
+            .Include(f => f.Flowers)
+            .ThenInclude(f => f.Flower)
+            .ToListAsync(token);
     }
     
     public Task<FlowerArrangement?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
-        return _dbContext.FlowerArrangements.SingleOrDefaultAsync(f => f.Id == id, token);
+        return _dbContext.FlowerArrangements
+            .Include(f => f.FlowerArrangementCategory)
+            .Include(f => f.Flowers)
+            .ThenInclude(f => f.Flower)
+            .SingleOrDefaultAsync(f => f.Id == id, token);
     }
 
     public Task UpdateAsync(FlowerArrangement flowerArrangement, CancellationToken token = default)
