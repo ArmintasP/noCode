@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
-using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
-using NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
+using NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
+using NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
+using NoCode.FlowerShop.Contracts.FlowerArrangements;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 

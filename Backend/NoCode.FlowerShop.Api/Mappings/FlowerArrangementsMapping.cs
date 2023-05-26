@@ -1,8 +1,8 @@
 ﻿using Mapster;
-using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
-using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
+using NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
+using NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
 using NoCode.FlowerShop.Contracts.Common;
-using NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
+using NoCode.FlowerShop.Contracts.FlowerArrangements;
 using NoCode.FlowerShop.Domain;
 
 namespace NoCode.FlowerShop.Api.Mappings;

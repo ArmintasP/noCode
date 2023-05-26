@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
+namespace NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
 
 public sealed class GetFlowerArrangementByIdValidator : AbstractValidator<GetFlowerArrangementByIdQuery>
 {

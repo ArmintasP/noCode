@@ -2,7 +2,7 @@
 using MediatR;
 using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 
-namespace NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
+namespace NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
 
 public sealed class AvailableFlowerArrangementsQueryHandler :
     IRequestHandler<AvailableFlowerArrangementsQuery, ErrorOr<AvailableFlowerArrangementsResult>>

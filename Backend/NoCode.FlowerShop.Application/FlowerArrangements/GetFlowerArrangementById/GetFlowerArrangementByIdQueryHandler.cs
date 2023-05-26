@@ -3,7 +3,7 @@ using MediatR;
 using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
-namespace NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
+namespace NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
 public sealed class GetFlowerArrangementByIdQueryHandler :
     IRequestHandler<GetFlowerArrangementByIdQuery, ErrorOr<GetFlowerArrangementByIdResult>>
 {
