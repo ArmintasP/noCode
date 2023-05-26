@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoCode.FlowerShop.Api", "noCode.FlowerShop.Api\NoCode.FlowerShop.Api.csproj", "{94509280-6BED-4978-ACDB-9978A90BD159}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3F451ABB-19FA-47CB-8B8D-3889341950CF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.Props = Directory.Build.Props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoCode.FlowerShop.Contracts", "noCode.FlowerShop.Contracts\NoCode.FlowerShop.Contracts.csproj", "{E1ADA774-9C86-478A-9105-DDCD965F7BA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoCode.FlowerShop.Domain", "noCode.FlowerShop.Domain\NoCode.FlowerShop.Domain.csproj", "{6B993DF0-6551-4929-85A1-D8C7240E7601}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoCode.FlowerShop.Application", "noCode.FlowerShop.Application\NoCode.FlowerShop.Application.csproj", "{8F78BFE9-3DEA-4E7D-AF98-D54C1C83082B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoCode.FlowerShop.Infrastructure", "NoCode.FlowerShop.Infrastructure\NoCode.FlowerShop.Infrastructure.csproj", "{2EED66BC-5552-4854-B843-2073B245347C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94509280-6BED-4978-ACDB-9978A90BD159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94509280-6BED-4978-ACDB-9978A90BD159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94509280-6BED-4978-ACDB-9978A90BD159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94509280-6BED-4978-ACDB-9978A90BD159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1ADA774-9C86-478A-9105-DDCD965F7BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1ADA774-9C86-478A-9105-DDCD965F7BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1ADA774-9C86-478A-9105-DDCD965F7BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1ADA774-9C86-478A-9105-DDCD965F7BA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B993DF0-6551-4929-85A1-D8C7240E7601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B993DF0-6551-4929-85A1-D8C7240E7601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B993DF0-6551-4929-85A1-D8C7240E7601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B993DF0-6551-4929-85A1-D8C7240E7601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F78BFE9-3DEA-4E7D-AF98-D54C1C83082B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F78BFE9-3DEA-4E7D-AF98-D54C1C83082B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F78BFE9-3DEA-4E7D-AF98-D54C1C83082B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F78BFE9-3DEA-4E7D-AF98-D54C1C83082B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EED66BC-5552-4854-B843-2073B245347C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EED66BC-5552-4854-B843-2073B245347C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EED66BC-5552-4854-B843-2073B245347C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EED66BC-5552-4854-B843-2073B245347C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8C9A1EF-4867-426A-B0C5-FB42E1F1FC9F}
+	EndGlobalSection
+EndGlobal
