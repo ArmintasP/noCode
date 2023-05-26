@@ -24,8 +24,8 @@ public class FlowersController : ApiController
     [AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> Create(CreateFlowerRequest request)
     {
-        var query = _mapper.Map<CreateFlowerCommand>(request);
-        var result = await _mediator.Send(query);
+        var command = _mapper.Map<CreateFlowerCommand>(request);
+        var result = await _mediator.Send(command);
         
         return result.Match(
             result => Ok(_mapper.Map<CreateFlowerResponse>(result)),

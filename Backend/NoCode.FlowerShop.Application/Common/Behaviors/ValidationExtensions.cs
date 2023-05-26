@@ -31,7 +31,7 @@ public static partial class ValidationExtensions
             const string pattern 
                 = @"^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$";
 
-            var regex = MyRegex();
+            var regex = UrlRegex();
 
             if (!regex.IsMatch(url)) 
                 context.AddFailure("The URL is not valid.");
@@ -39,5 +39,5 @@ public static partial class ValidationExtensions
     }
 
     [GeneratedRegex("^[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$")]
-    private static partial Regex MyRegex();
+    private static partial Regex UrlRegex();
 }
