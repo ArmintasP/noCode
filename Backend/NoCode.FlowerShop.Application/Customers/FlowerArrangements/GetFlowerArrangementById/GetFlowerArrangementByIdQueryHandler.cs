@@ -16,7 +16,7 @@ public sealed class GetFlowerArrangementByIdQueryHandler :
 
     public async Task<ErrorOr<GetFlowerArrangementByIdResult>> Handle(GetFlowerArrangementByIdQuery request, CancellationToken cancellationToken)
     {
-        var flowerArrangement = await _flowerArrangementRepository.GetByIdAsync(request.id);
+        var flowerArrangement = await _flowerArrangementRepository.GetByIdAsync(request.id, cancellationToken);
 
         if (flowerArrangement is null)
             return Errors.FlowerArrangement.NotFound;
