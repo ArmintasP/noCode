@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
-[Route("flower/arrangements")]
+[Route("flower-arrangements")]
 public class FlowerArrangementsController : ApiController
 {
     private readonly IMapper _mapper;
