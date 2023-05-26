@@ -6,6 +6,6 @@ public interface IFlowerArrangementCategoryRepository
 {
     Task AddAsync(FlowerArrangementCategory flowerArrangementCategory, CancellationToken token = default);
     Task<FlowerArrangementCategory?> GetById(Guid id, CancellationToken token = default);
-    Task<List<FlowerArrangementCategory>> GetAllAsync(CancellationToken token = default);
+    IQueryable<FlowerArrangementCategory> GetAll();
     Task UpdateAsync(FlowerArrangementCategory flowerArrangementCategory, CancellationToken token = default);
 }

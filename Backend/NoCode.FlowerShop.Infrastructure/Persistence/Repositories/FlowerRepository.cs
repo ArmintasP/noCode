@@ -19,9 +19,9 @@ public sealed class FlowerRepository : IFlowerRepository
         await _dbContext.SaveChangesAsync(token);
     }
 
-    public Task<List<Flower>> GetAllAsync(CancellationToken token = default)
+    public IQueryable<Flower> GetAll()
     {
-        return _dbContext.Flowers.ToListAsync(token);
+        return _dbContext.Flowers;
     }
 
     public Task<Flower?> GetByIdAsync(Guid id, CancellationToken token = default)

@@ -18,13 +18,12 @@ public sealed class FlowerArrangementRepository : IFlowerArrangementRepository
         await _dbContext.SaveChangesAsync(token);
     }
 
-    public Task<List<FlowerArrangement>> GetAllAsync(CancellationToken token = default)
+    public IQueryable<FlowerArrangement> GetAll()
     {
         return _dbContext.FlowerArrangements
             .Include(f => f.FlowerArrangementCategory)
             .Include(f => f.Flowers)
-            .ThenInclude(f => f.Flower)
-            .ToListAsync(token);
+            .ThenInclude(f => f.Flower);
     }
     
     public Task<FlowerArrangement?> GetByIdAsync(Guid id, CancellationToken token = default)
