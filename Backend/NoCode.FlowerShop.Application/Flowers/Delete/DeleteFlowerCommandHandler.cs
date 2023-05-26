@@ -16,11 +16,13 @@ public class DeleteFlowerCommandHandler : IRequestHandler<DeleteFlowerCommand, E
 
     public async Task<ErrorOr<DeleteFlowerResult>> Handle(DeleteFlowerCommand request, CancellationToken cancellationToken)
     {
-        var isDeleted = await _flowerRepository.DeleteByIdAsync(request.Id, cancellationToken);
-        
-        if (!isDeleted) 
-            return Errors.Flowers.NotFound;
+        var flowerToDelete = await _flowerRepository.GetByIdAsync(request.Id, cancellationToken);
 
+        if (flowerToDelete is null)
+            return Errors.Flowers.NotFound;
+        
+        await _flowerRepository.DeleteByIdAsync(flowerToDelete, cancellationToken);
+        
         return new DeleteFlowerResult();
     }
 }
