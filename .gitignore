@@ -3,3 +3,5 @@
 ################################################################################
 
 /Backend/NoCode.FlowerShop.Api/Properties/launchSettings.json
+/.vs
+/Database
