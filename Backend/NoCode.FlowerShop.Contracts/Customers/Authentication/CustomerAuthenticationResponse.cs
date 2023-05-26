@@ -1,4 +1,4 @@
-﻿namespace NoCode.FlowerShop.Contracts.Customers.Authentication.Common;
+﻿namespace NoCode.FlowerShop.Contracts.Customers.Authentication;
 
 public record CustomerAuthenticationResponse(
     int Id,

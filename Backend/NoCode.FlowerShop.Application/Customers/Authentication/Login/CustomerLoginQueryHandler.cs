@@ -13,29 +13,35 @@ public sealed class CustomerLoginQueryHandler :
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly ICustomerRepository _customerRepository;
-    private readonly IPasswordProvider _passwordHasher;
+    private readonly IPasswordProvider _passwordProvider;
 
     public CustomerLoginQueryHandler(
         IJwtTokenGenerator jwtTokenGenerator,
         ICustomerRepository customerRepository,
-        IPasswordProvider passwordHasher)
+        IPasswordProvider passwordProvider)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _customerRepository = customerRepository;
-        _passwordHasher = passwordHasher;
+        _passwordProvider = passwordProvider;
     }
 
     public async Task<ErrorOr<CustomerAuthenticationResult>> Handle(
         CustomerLoginQuery request,
         CancellationToken cancellationToken)
     {
-        if (await _customerRepository.GetCustomerByEmailAsync(request.Email) is not Customer customer)
+        var customer = await _customerRepository.GetCustomerByEmailAsync(request.Email);
+        if (customer is null)
             return Errors.Customer.InvalidCredentials;
 
-        if (!_passwordHasher.VerifyPassword(request.Password, customer.Password, customer.Salt))
+        if (IsCorrectPassword(request, customer))
             return Errors.Customer.InvalidCredentials;
 
         var token = _jwtTokenGenerator.GenerateToken(customer);
         return new CustomerAuthenticationResult(customer, token);
+    }
+
+    private bool IsCorrectPassword(CustomerLoginQuery request, Customer customer)
+    {
+        return !_passwordProvider.VerifyPassword(request.Password, customer.Password, customer.Salt);
     }
 }

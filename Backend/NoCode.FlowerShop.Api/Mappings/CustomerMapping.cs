@@ -3,7 +3,6 @@ using NoCode.FlowerShop.Application.Customers.Authentication.Common;
 using NoCode.FlowerShop.Application.Customers.Authentication.Login;
 using NoCode.FlowerShop.Application.Customers.Authentication.Register;
 using NoCode.FlowerShop.Contracts.Customers.Authentication;
-using NoCode.FlowerShop.Contracts.Customers.Authentication.Common;
 
 namespace NoCode.FlowerShop.Api.Mappings;
 

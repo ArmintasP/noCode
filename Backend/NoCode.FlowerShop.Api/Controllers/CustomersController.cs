@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Application.Customers.Authentication.Login;
 using NoCode.FlowerShop.Application.Customers.Authentication.Register;
 using NoCode.FlowerShop.Contracts.Customers.Authentication;
-using NoCode.FlowerShop.Contracts.Customers.Authentication.Common;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
+[Route("customers")]
 public class CustomersController : ApiController
 {
     private readonly IMapper _mapper;
@@ -19,8 +19,8 @@ public class CustomersController : ApiController
         _mapper = mapper;
         _mediator = mediator;
     }
-
-    [HttpPost("customers/signup")]
+    
+    [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register(CustomerRegisterRequest request)
     {
@@ -31,13 +31,13 @@ public class CustomersController : ApiController
             result => Ok(_mapper.Map<CustomerAuthenticationResponse>(result)),
             errors => Problem(errors));
     }
-
-    [HttpPost("customers/login")]
+    
+    [HttpGet("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(CustomerLoginRequest request)
     {
-        var command = _mapper.Map<CustomerLoginQuery>(request);
-        var result = await _mediator.Send(command);
+        var query = _mapper.Map<CustomerLoginQuery>(request);
+        var result = await _mediator.Send(query);
 
         return result.Match(
             result => Ok(_mapper.Map<CustomerAuthenticationResponse>(result)),
