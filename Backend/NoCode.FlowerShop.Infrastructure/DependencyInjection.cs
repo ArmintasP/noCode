@@ -38,6 +38,8 @@ public static class DependencyInjection
             options.UseSqlite(sqlConnectionString));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+
         return services;
     }
 
