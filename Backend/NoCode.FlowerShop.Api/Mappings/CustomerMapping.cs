@@ -3,7 +3,6 @@ using NoCode.FlowerShop.Application.Customers.Authentication.Common;
 using NoCode.FlowerShop.Application.Customers.Authentication.Login;
 using NoCode.FlowerShop.Application.Customers.Authentication.Register;
 using NoCode.FlowerShop.Contracts.Customers.Authentication;
-using NoCode.FlowerShop.Contracts.Customers.Authentication.Common;
 
 namespace NoCode.FlowerShop.Api.Mappings;
 
@@ -11,7 +10,9 @@ public sealed class CustomerMapping : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<CustomerAuthenticationResult, CustomerAuthenticationResponse>();
+        config.NewConfig<CustomerAuthenticationResult, CustomerAuthenticationResponse>()
+            .Map(dest => dest, src => src.Customer);
+
         config.NewConfig<CustomerRegisterRequest, CustomerRegisterCommand>();
         config.NewConfig<CustomerLoginRequest, CustomerLoginQuery>();
     }
