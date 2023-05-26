@@ -9,4 +9,5 @@ public interface IFlowerRepository
     IQueryable<Flower> GetAll();
     Task<Flower?> GetByIdAsync(Guid id, CancellationToken token = default);
     Task UpdateAsync(Flower flower, CancellationToken token = default);
+    Task<bool> DeleteByIdAsync(Guid id, CancellationToken token = default);
 }
