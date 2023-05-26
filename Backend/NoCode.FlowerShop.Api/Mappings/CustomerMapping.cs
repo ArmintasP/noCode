@@ -10,7 +10,9 @@ public sealed class CustomerMapping : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<CustomerAuthenticationResult, CustomerAuthenticationResponse>();
+        config.NewConfig<CustomerAuthenticationResult, CustomerAuthenticationResponse>()
+            .Map(dest => dest, src => src.Customer);
+
         config.NewConfig<CustomerRegisterRequest, CustomerRegisterCommand>();
         config.NewConfig<CustomerLoginRequest, CustomerLoginQuery>();
     }

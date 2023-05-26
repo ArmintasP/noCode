@@ -9,7 +9,8 @@ public sealed class AdministratorsMapping : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<AdministratorLoginRequest, AdministratorLoginQuery>();
-        config.NewConfig<AdministratorAuthenticationResult, AdministratorAuthenticationResponse>();
+        config.NewConfig<AdministratorAuthenticationResult, AdministratorAuthenticationResponse>()
+            .Map(dest => dest, src => src.Administrator);
     }
 }
 
