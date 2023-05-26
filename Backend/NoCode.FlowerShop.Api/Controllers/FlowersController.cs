@@ -1,6 +1,8 @@
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NoCode.FlowerShop.Application.Flowers.Create;
+using NoCode.FlowerShop.Contracts.Flowers;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
@@ -14,5 +16,13 @@ public class FlowersController : ApiController
     {
         _mediator = mediator;
         _mapper = mapper;
+    }
+
+    [HttpPost("")]
+    public async Task<IActionResult> Create(CreateFlowerRequest request)
+    {
+        var query = _mapper.Map<CreateFlowerCommand>(request);
+        var result = await _mediator.Send(query);
+        return result.Match(Ok, Problem);
     }
 }
