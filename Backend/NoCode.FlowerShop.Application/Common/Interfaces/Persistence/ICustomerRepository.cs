@@ -4,9 +4,8 @@ namespace NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 
 public interface ICustomerRepository
 {
-    Guid NextIdentity();
-    Task<Customer?> GetCustomerByEmail(string email);
-    Task<Customer?> GetCustomerById(Guid id);
-    Task Add(Customer customer);
-    Task Update(Customer customer);
+    Task AddAsync(Customer customer, CancellationToken token = default);
+    Task<Customer?> GetCustomerByEmailAsync(string email, CancellationToken token = default);
+    Task<Customer?> GetCustomerByIdAsync(Guid id, CancellationToken token = default);
+    Task UpdateAsync(Customer customer, CancellationToken token = default);
 }

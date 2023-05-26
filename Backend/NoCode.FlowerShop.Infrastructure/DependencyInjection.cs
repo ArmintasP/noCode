@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -9,6 +10,7 @@ using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Infrastructure;
 using NoCode.FlowerShop.Infrastructure.Authentication;
 using NoCode.FlowerShop.Infrastructure.Persistence;
+using NoCode.FlowerShop.Infrastructure.Persistence.Repositories;
 using NoCode.FlowerShop.Infrastructure.Time;
 using System.Text;
 
@@ -18,7 +20,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.AddPersistence();
+        services.AddPersistence(configuration);
         services.AddAuthentication(configuration);
 
         services.Configure<PasswordProviderSettings>(configuration.GetSection("PasswordProviderSettings"));
@@ -28,8 +30,13 @@ public static class DependencyInjection
         return services;
     }
 
-    private static IServiceCollection AddPersistence(this IServiceCollection services)
+    private static IServiceCollection AddPersistence(this IServiceCollection services, ConfigurationManager configuration)
     {
+        var sqlConnectionString = configuration.GetValue<string>("SqlConnectionString");
+
+        services.AddDbContext<FlowerShopDbContext>(options =>
+            options.UseSqlite(sqlConnectionString));
+
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         return services;
     }

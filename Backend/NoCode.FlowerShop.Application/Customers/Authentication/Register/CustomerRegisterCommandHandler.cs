@@ -30,17 +30,17 @@ public sealed class CustomerRegisterCommandHandler :
         CustomerRegisterCommand request,
         CancellationToken cancellationToken)
     {
-        if (await _customerRepository.GetCustomerByEmail(request.Email) is not null)
+        if (await _customerRepository.GetCustomerByEmailAsync(request.Email) is not null)
             return Errors.Customer.DuplicateEmail;
 
         var (hashedPassword, salt) = _passwordHasher.HashPassword(request.Password);
 
         var customer = new Customer(
-            _customerRepository.NextIdentity(),
             request.Email,
             hashedPassword,
             salt);
-        await _customerRepository.Add(customer);
+        
+        await _customerRepository.AddAsync(customer);
 
         var token = _jwtTokenGenerator.GenerateToken(customer);
         return new CustomerAuthenticationResult(customer, token);

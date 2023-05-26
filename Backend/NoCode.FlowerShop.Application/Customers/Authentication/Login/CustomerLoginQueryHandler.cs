@@ -29,7 +29,7 @@ public sealed class CustomerLoginQueryHandler :
         CustomerLoginQuery request,
         CancellationToken cancellationToken)
     {
-        if (await _customerRepository.GetCustomerByEmail(request.Email) is not Customer customer)
+        if (await _customerRepository.GetCustomerByEmailAsync(request.Email) is not Customer customer)
             return Errors.Customer.InvalidCredentials;
 
         if (!_passwordHasher.VerifyPassword(request.Password, customer.Password, customer.Salt))

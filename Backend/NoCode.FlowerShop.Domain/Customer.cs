@@ -8,8 +8,7 @@ public sealed class Customer : Entity<Guid>
     public string Password { get; private set; }
     public byte[] Salt { get; }
 
-    public Customer(Guid id, string email, string password, byte[] salt)
-        : base(id)
+    public Customer(string email, string password, byte[] salt)
     {
         Email = email;
         Password = password;
