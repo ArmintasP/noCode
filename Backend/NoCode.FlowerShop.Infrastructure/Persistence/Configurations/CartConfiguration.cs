@@ -28,7 +28,7 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
 
             fb.Property(f => f.Quantity)
                 .IsRequired()
-                .HasConversion<uint>();
+                .HasConversion<int>();
         });
     }
 }

@@ -17,7 +17,7 @@ public class AdministratorConfiguration : IEntityTypeConfiguration<Administrator
         builder.HasKey(a => a.Id);
         builder.Property(a => a.Id).ValueGeneratedOnAdd();
         builder.Property(a => a.Email).IsRequired().HasMaxLength(80);
-        builder.Property(a => a.Password).IsRequired().HasMaxLength(50);
+        builder.Property(a => a.Password).IsRequired().HasMaxLength(256);
         builder.Property(a => a.Salt).HasConversion<byte[]>().IsRequired().HasMaxLength(64);
         builder.HasIndex(a => a.Email).IsUnique();
     }
