@@ -17,7 +17,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id).ValueGeneratedOnAdd();
         builder.Property(c => c.Email).IsRequired().HasMaxLength(80);
-        builder.Property(c => c.Password).IsRequired().HasMaxLength(50);
+        builder.Property(c => c.Password).IsRequired().HasMaxLength(256);
         builder.Property(c => c.Salt).HasConversion<byte[]>().IsRequired().HasMaxLength(64);
         builder.HasIndex(c => c.Email).IsUnique();
     }
