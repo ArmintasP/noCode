@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Newtonsoft.Json;
 using NoCode.FlowerShop.Api;
@@ -7,6 +6,9 @@ using NoCode.FlowerShop.Api.Mappings;
 using NoCode.FlowerShop.Application;
 using NoCode.FlowerShop.Infrastructure;
 using System.Globalization;
+using NoCode.FlowerShop.Application.Common.Interfaces.Interceptors;
+using NoCode.FlowerShop.Infrastructure.ActionFilters;
+using NoCode.FlowerShop.Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -16,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
         .AddMappings()
         .AddSwagger();
 
+    builder.Services.AddSingleton<IActionLogService, ActionLogService>();
+    
     builder.Services.AddSingleton<ProblemDetailsFactory, FlowerShopProblemDetailsFactory>();
     builder.Services.AddControllers()
         .AddNewtonsoftJson(options =>
@@ -29,7 +33,12 @@ var builder = WebApplication.CreateBuilder(args);
             options.SerializerSettings.Culture = new CultureInfo("en-IE");
             options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
         });
-
+    
+    builder.Services.AddControllersWithViews(options =>
+    {
+        options.Filters.Add<LogActionFilter>();
+    });
+    
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("CorsPolicy", builder =>
