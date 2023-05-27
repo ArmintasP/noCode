@@ -1,12 +1,14 @@
 ﻿using ErrorOr;
 
+
 namespace NoCode.FlowerShop.Domain.Common.ErrorsCollection;
+
 public static partial class Errors
 {
-    public static class FlowerArrangement
+    public static class Cart
     {
         public static Error NotFound => Error.Conflict(
-            code: "FlowerArrangement.NotFound",
-            description: "Flower arrangement does not exist.");
+            code: "Cart.NotFound",
+            description: "Cart does not exist.");
     }
 }

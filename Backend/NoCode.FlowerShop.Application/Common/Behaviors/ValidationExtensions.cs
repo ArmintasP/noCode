@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using FluentValidation;
+﻿using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace NoCode.FlowerShop.Application.Common.Behaviors;
 
@@ -23,18 +23,21 @@ public static partial class ValidationExtensions
                 context.AddFailure("Password must contain at least one digit");
         });
     }
-    
-    public static void ValidUrl<T>(this IRuleBuilder<T, string> ruleBuilder)
-    {
-        ruleBuilder.Custom((url, context) =>
-        {
-            var regex = UrlRegex();
 
-            if (!regex.IsMatch(url)) 
+    public static IRuleBuilderOptionsConditions<T, string> ValidUrl<T>(this IRuleBuilder<T, string> ruleBuilder)
+    {
+        return ruleBuilder.Custom((url, context) =>
+        {
+            const string pattern
+                = @"^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$";
+
+            var regex = MyRegex();
+
+            if (!regex.IsMatch(url))
                 context.AddFailure("The URL is not valid.");
         });
     }
 
     [GeneratedRegex("^[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$")]
-    private static partial Regex UrlRegex();
+    private static partial Regex MyRegex();
 }

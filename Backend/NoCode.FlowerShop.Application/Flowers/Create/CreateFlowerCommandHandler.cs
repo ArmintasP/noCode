@@ -6,7 +6,7 @@ using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
 namespace NoCode.FlowerShop.Application.Flowers.Create;
 
-public sealed class CreateFlowerCommandHandler 
+public sealed class CreateFlowerCommandHandler
     : IRequestHandler<CreateFlowerCommand, ErrorOr<CreateFlowerResult>>
 {
     private readonly IFlowerRepository _flowerRepository;
@@ -24,7 +24,7 @@ public sealed class CreateFlowerCommandHandler
 
         var flowerToCreate = new Flower(request.Name, request.ImageUrl);
 
-        var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, cancellationToken);
+        var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, CancellationToken.None);
 
         return new CreateFlowerResult(createdFlower);
     }

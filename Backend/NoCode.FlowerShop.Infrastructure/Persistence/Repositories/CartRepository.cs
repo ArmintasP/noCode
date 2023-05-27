@@ -21,12 +21,22 @@ public class CartRepository : ICartRepository
 
     public Task<Cart?> GetByCustomerId(Guid customerId, CancellationToken token = default)
     {
-        return _dbContext.Carts.SingleOrDefaultAsync(c => c.Customer.Id == customerId, token);
+        return _dbContext.Carts
+            .Include(c => c.Customer)
+            .Include(c => c.FlowerArrangements)
+            .ThenInclude(fa => fa.FlowerArrangement)
+            .SingleOrDefaultAsync(c => c.Customer.Id == customerId, token);
     }
 
     public Task UpdateAsync(Cart cart, CancellationToken token = default)
     {
         _dbContext.Update(cart);
         return _dbContext.SaveChangesAsync(token);
+    }
+
+    public async Task DeleteAsync(Cart cart, CancellationToken token = default)
+    {
+        _dbContext.Remove(cart);
+        await _dbContext.SaveChangesAsync(token);
     }
 }

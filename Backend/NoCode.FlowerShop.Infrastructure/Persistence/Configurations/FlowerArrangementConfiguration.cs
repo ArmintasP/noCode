@@ -28,7 +28,7 @@ public class FlowerArrangementConfiguration : IEntityTypeConfiguration<FlowerArr
 
         builder.Property(f => f.StorageQuantity)
             .IsRequired();
-        
+
         builder.Property(f => f.ImageUrl)
             .IsRequired()
             .HasMaxLength(256);

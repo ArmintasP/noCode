@@ -14,17 +14,17 @@ public sealed class Cart : Entity<Guid>
         Customer = customer;
         FlowerArrangements = flowerArrangements;
     }
-    
+
     public void AdjustFlowerArrangementQuantity(FlowerArrangement flowerArrangement, uint quantity)
     {
         var flowerArrangementPair = FlowerArrangements.SingleOrDefault(x => x.FlowerArrangement == flowerArrangement);
-        
+
         if (quantity is 0 && flowerArrangementPair is not null)
         {
             FlowerArrangements.Remove(flowerArrangementPair);
             return;
         }
-        
+
         flowerArrangementPair ??= new FlowerArrangementPair(flowerArrangement, quantity);
         flowerArrangementPair.Quantity = quantity;
     }

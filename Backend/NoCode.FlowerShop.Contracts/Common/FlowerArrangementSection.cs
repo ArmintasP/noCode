@@ -7,4 +7,5 @@ public sealed record FlowerArrangementSection(
     string ImageUrl,
     decimal Price,
     string CategoryName,
-    List<FlowerSection> Flowers);
+    List<FlowerSection> Flowers,
+    uint? Quantity);

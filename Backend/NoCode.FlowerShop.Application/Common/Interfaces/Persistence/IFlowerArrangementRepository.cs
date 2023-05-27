@@ -8,6 +8,4 @@ public interface IFlowerArrangementRepository
     IQueryable<FlowerArrangement> GetAll();
     Task<FlowerArrangement?> GetByIdAsync(Guid id, CancellationToken token = default);
     Task UpdateAsync(FlowerArrangement flowerArrangement, CancellationToken token = default);
-
-    Task DeleteAsync(FlowerArrangement flowerArrangement, CancellationToken token = default);
 }

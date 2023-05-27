@@ -2,12 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NoCode.FlowerShop.Api.Attributes;
-using NoCode.FlowerShop.Application.FlowerArrangements.Delete;
-using NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
-using NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
-using NoCode.FlowerShop.Contracts.FlowerArrangements;
-using NoCode.FlowerShop.Domain.Common;
+using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
+using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrangementById;
+using NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
@@ -44,18 +41,6 @@ public class FlowerArrangementsController : ApiController
 
         return result.Match(
             result => Ok(_mapper.Map<GetFlowerArrangementByIdResponse>(result)),
-            errors => Problem(errors));
-    }
-
-    [HttpDelete("{id:guid}")]
-    [AuthorizeRoles(UserRole.Administrator)]
-    public async Task<IActionResult> DeleteFlowerArrangement(Guid id)
-    {
-        var command = new DeleteFlowerArrangementCommand(id);
-        var result = await _mediator.Send(command);
-
-        return result.Match(
-            result => NoContent(),
             errors => Problem(errors));
     }
 }
