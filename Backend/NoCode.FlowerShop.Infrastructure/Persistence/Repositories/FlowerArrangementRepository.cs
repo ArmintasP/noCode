@@ -18,9 +18,9 @@ public sealed class FlowerArrangementRepository : IFlowerArrangementRepository
         await _dbContext.SaveChangesAsync(token);
     }
 
-    public Task DeleteAsync(Guid id, CancellationToken token = default)
+    public Task DeleteAsync(FlowerArrangement flowerArrangement, CancellationToken token = default)
     {
-        _dbContext.Remove(id);
+        _dbContext.Remove(flowerArrangement);
         return _dbContext.SaveChangesAsync(token);
     }
 

@@ -21,7 +21,7 @@ public sealed class DeleteFlowerArrangementCommandHandler :
         if (flowerArrangement is null)
             return Errors.FlowerArrangement.NotFound;
 
-        await _flowerArrangementRepository.DeleteAsync(flowerArrangement.Id, cancellationToken);
+        await _flowerArrangementRepository.DeleteAsync(flowerArrangement, cancellationToken);
         return new DeleteFlowerArrangementResult();
     }
 }

@@ -9,5 +9,5 @@ public interface IFlowerArrangementRepository
     Task<FlowerArrangement?> GetByIdAsync(Guid id, CancellationToken token = default);
     Task UpdateAsync(FlowerArrangement flowerArrangement, CancellationToken token = default);
 
-    Task DeleteAsync(Guid id, CancellationToken token = default);
+    Task DeleteAsync(FlowerArrangement flowerArrangement, CancellationToken token = default);
 }

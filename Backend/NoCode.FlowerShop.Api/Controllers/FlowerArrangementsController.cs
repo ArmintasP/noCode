@@ -47,7 +47,7 @@ public class FlowerArrangementsController : ApiController
             errors => Problem(errors));
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     [AuthorizeRoles(UserRole.Administrator)]
     public async Task<IActionResult> DeleteFlowerArrangement(Guid id)
     {
