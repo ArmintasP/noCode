@@ -28,7 +28,13 @@ var builder = WebApplication.CreateBuilder(args);
             options.SerializerSettings.Culture = new CultureInfo("en-IE");
             options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
         });
+
+
+    builder.Services.AddCors();
 }
+
+var crossOrigin = builder.Configuration.GetValue<string>("CrossOrigin")!;
+
 
 var app = builder.Build();
 {
@@ -40,6 +46,8 @@ var app = builder.Build();
 
     app.UseHttpsRedirection();
     app.MapControllers();
+
+    app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins(crossOrigin));
 }
 
 app.Run();
