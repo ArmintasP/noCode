@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Newtonsoft.Json;
 using NoCode.FlowerShop.Api;
@@ -29,12 +30,17 @@ var builder = WebApplication.CreateBuilder(args);
             options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
         });
 
-
-    builder.Services.AddCors();
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy", builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+    });
 }
-
-var crossOrigin = builder.Configuration.GetValue<string>("CrossOrigin")!;
-
 
 var app = builder.Build();
 {
@@ -47,7 +53,7 @@ var app = builder.Build();
     app.UseHttpsRedirection();
     app.MapControllers();
 
-    app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins(crossOrigin));
+    app.UseCors("CorsPolicy");
 }
 
 app.Run();
