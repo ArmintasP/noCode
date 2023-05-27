@@ -1,5 +1,6 @@
 ﻿using NoCode.FlowerShop.Domain.Common;
 using NoCode.FlowerShop.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -14,6 +15,9 @@ public sealed class Order : Entity<Guid>
     public List<FlowerArrangementPair> FlowerArrangements { get; private set; }
     public Customer Customer { get; private set; }
     public DeliveryLocation DeliveryLocation { get; private set; }
+    
+    [Timestamp]
+    public byte[]? Version { get; private set; }
 
     public Order(
         DeliveryOption deliveryOption,

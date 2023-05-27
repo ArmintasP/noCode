@@ -51,5 +51,8 @@ public class FlowerArrangementConfiguration : IEntityTypeConfiguration<FlowerArr
 
         builder.HasIndex(f => f.Name)
             .IsUnique();
+
+        builder.Property(p => p.Version)
+            .IsRowVersion();
     }
 }

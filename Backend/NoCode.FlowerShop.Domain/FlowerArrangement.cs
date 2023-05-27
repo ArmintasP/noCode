@@ -1,4 +1,5 @@
 ﻿using NoCode.FlowerShop.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -11,7 +12,10 @@ public sealed class FlowerArrangement : Entity<Guid>
     public int StorageQuantity { get; private set; }
     public FlowerArrangementCategory FlowerArrangementCategory { get; private set; }
     public List<Flowers> Flowers { get; private set; }
-
+    
+    [Timestamp]
+    public byte[]? Version { get; private set; }
+    
     public FlowerArrangement(
         string name,
         string description,

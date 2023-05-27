@@ -42,5 +42,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 .IsRequired()
                 .HasConversion<int>();
         });
+
+        builder.Property(p => p.Version)
+            .IsRowVersion();
     }
 }

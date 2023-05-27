@@ -14,11 +14,30 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     private static void ConfigureCustomersTable(EntityTypeBuilder<Customer> builder)
     {
         builder.ToTable("Customers");
+        
         builder.HasKey(c => c.Id);
-        builder.Property(c => c.Id).ValueGeneratedOnAdd();
-        builder.Property(c => c.Email).IsRequired().HasMaxLength(80);
-        builder.Property(c => c.Password).IsRequired().HasMaxLength(256);
-        builder.Property(c => c.Salt).HasConversion<byte[]>().IsRequired().HasMaxLength(64);
-        builder.HasIndex(c => c.Email).IsUnique();
+        
+        builder.Property(c => c.Id)
+            .ValueGeneratedOnAdd();
+        
+        builder.Property(c => c.Email)
+            .IsRequired()
+            .HasMaxLength(80);
+        
+        builder.Property(c => c.Password)
+            .IsRequired()
+            .HasMaxLength(256);
+        
+        builder.Property(c => c.Salt)
+            .HasConversion<byte[]>()
+            .IsRequired()
+            .HasMaxLength(64);
+        
+        builder
+            .HasIndex(c => c.Email)
+            .IsUnique();
+
+        builder.Property(p => p.Version)
+            .IsRowVersion();
     }
 }

@@ -34,5 +34,8 @@ public class DeliveryLocationConfiguration : IEntityTypeConfiguration<DeliveryLo
         builder.Property(d => d.ZipCode)
             .IsRequired()
             .HasMaxLength(16);
+
+        builder.Property(p => p.Version)
+            .IsRowVersion();
     }
 }
