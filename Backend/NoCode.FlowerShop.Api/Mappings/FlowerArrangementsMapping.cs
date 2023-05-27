@@ -4,6 +4,7 @@ using NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetFlowerArrang
 using NoCode.FlowerShop.Contracts.Common;
 using NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
 using NoCode.FlowerShop.Domain;
+using NoCode.FlowerShop.Domain.Common;
 
 namespace NoCode.FlowerShop.Api.Mappings;
 
