@@ -14,6 +14,8 @@ public class FlowerShopDbContext : DbContext
     public DbSet<FlowerArrangement> FlowerArrangements { get; set; } = null!;
     public DbSet<FlowerArrangementCategory> FlowerArrangementCategories { get; set; } = null!;
     public DbSet<Cart> Carts { get; set; } = null!;
+    public DbSet<DeliveryLocation> DeliveryLocations { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
