@@ -1,6 +1,6 @@
 ﻿using NoCode.FlowerShop.Domain;
 
-namespace NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
+namespace NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
 
 public sealed record AvailableFlowerArrangementsResult(
     List<FlowerArrangement> FlowerArrangements);

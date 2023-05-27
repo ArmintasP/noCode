@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace NoCode.FlowerShop.Application.Customers.FlowerArrangements.GetAvailableFlowerArragementsList;
+namespace NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
 
 public sealed record AvailableFlowerArrangementsQuery() : IRequest<ErrorOr<AvailableFlowerArrangementsResult>>;
 
