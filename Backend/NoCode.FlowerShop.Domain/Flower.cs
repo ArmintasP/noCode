@@ -1,4 +1,5 @@
-﻿using NoCode.FlowerShop.Domain.Common.Models;
+﻿using System.Transactions;
+using NoCode.FlowerShop.Domain.Common.Models;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -11,6 +12,16 @@ public sealed class Flower : Entity<Guid>
     {
         Name = name;
         ImageUrl = imageUrl;
+    }
+
+    public void UpdateImageUrl(string imageUrl)
+    {
+        ImageUrl = imageUrl;
+    }
+
+    public void UpdateName(string name)
+    {
+        Name = name;
     }
 
 #pragma warning disable CS8618
