@@ -14,6 +14,7 @@ public class FlowersMappings : IRegister
             .Map(dest => dest.Id, src => src.Flower.Id);
 
         config.NewConfig<DeleteFlowerResult, DeleteFlowerResponse>();
+        config.NewConfig<GetAllFlowersResult, GetAllFlowersResponse>();
 
         config.NewConfig<(UpdateFlowerRequest request, Guid id), UpdateFlowerCommand>()
             .Map(dest => dest.Id, src => src.id)

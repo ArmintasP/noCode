@@ -1,5 +1,6 @@
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Api.Attributes;
 using NoCode.FlowerShop.Application.Flowers.Create;
@@ -31,6 +32,18 @@ public class FlowersController : ApiController
 
         return result.Match(
             result => Ok(_mapper.Map<CreateFlowerResponse>(result)),
+            errors => Problem(errors));
+    }
+
+    [HttpGet("")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAll()
+    {
+        var query = new GetAllFlowersQuery();
+        var result = await _mediator.Send(query);
+
+        return result.Match(
+            result => Ok(_mapper.Map<GetAllFlowersResponse>(result)),
             errors => Problem(errors));
     }
 
