@@ -6,8 +6,15 @@
  */
 import * as axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import { useMutation } from 'react-query';
-import type { UseMutationOptions, MutationFunction } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
+import type {
+  UseQueryOptions,
+  UseMutationOptions,
+  QueryFunction,
+  MutationFunction,
+  UseQueryResult,
+  QueryKey,
+} from 'react-query';
 export interface CustomerRegisterRequest {
   email?: string | null;
   password?: string | null;
@@ -16,6 +23,11 @@ export interface CustomerRegisterRequest {
 export interface CustomerLoginRequest {
   email?: string | null;
   password?: string | null;
+}
+
+export interface CreateFlowerRequest {
+  name?: string | null;
+  imageUrl?: string | null;
 }
 
 export interface AdministratorLoginRequest {
@@ -214,6 +226,323 @@ export const usePostCustomersLogin = <
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getPostCustomersLoginMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+export const getFlowerArrangementsAvailable = (
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.get(`/flower-arrangements/available`, options);
+};
+
+export const getGetFlowerArrangementsAvailableQueryKey = () =>
+  [`/flower-arrangements/available`] as const;
+
+export const getGetFlowerArrangementsAvailableQueryOptions = <
+  TData = Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>,
+  TError = AxiosError<unknown>
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>,
+    TError,
+    TData
+  >;
+  axios?: AxiosRequestConfig;
+}): UseQueryOptions<
+  Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>,
+  TError,
+  TData
+> & { queryKey: QueryKey } => {
+  const { query: queryOptions, axios: axiosOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetFlowerArrangementsAvailableQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>
+  > = ({ signal }) =>
+    getFlowerArrangementsAvailable({ signal, ...axiosOptions });
+
+  return { queryKey, queryFn, ...queryOptions };
+};
+
+export type GetFlowerArrangementsAvailableQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>
+>;
+export type GetFlowerArrangementsAvailableQueryError = AxiosError<unknown>;
+
+export const useGetFlowerArrangementsAvailable = <
+  TData = Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>,
+  TError = AxiosError<unknown>
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getFlowerArrangementsAvailable>>,
+    TError,
+    TData
+  >;
+  axios?: AxiosRequestConfig;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = getGetFlowerArrangementsAvailableQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const getFlowerArrangementsId = (
+  id: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.get(`/flower-arrangements/${id}`, options);
+};
+
+export const getGetFlowerArrangementsIdQueryKey = (id: string) =>
+  [`/flower-arrangements/${id}`] as const;
+
+export const getGetFlowerArrangementsIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getFlowerArrangementsId>>,
+  TError = AxiosError<unknown>
+>(
+  id: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getFlowerArrangementsId>>,
+      TError,
+      TData
+    >;
+    axios?: AxiosRequestConfig;
+  }
+): UseQueryOptions<
+  Awaited<ReturnType<typeof getFlowerArrangementsId>>,
+  TError,
+  TData
+> & { queryKey: QueryKey } => {
+  const { query: queryOptions, axios: axiosOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetFlowerArrangementsIdQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getFlowerArrangementsId>>
+  > = ({ signal }) => getFlowerArrangementsId(id, { signal, ...axiosOptions });
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions };
+};
+
+export type GetFlowerArrangementsIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getFlowerArrangementsId>>
+>;
+export type GetFlowerArrangementsIdQueryError = AxiosError<unknown>;
+
+export const useGetFlowerArrangementsId = <
+  TData = Awaited<ReturnType<typeof getFlowerArrangementsId>>,
+  TError = AxiosError<unknown>
+>(
+  id: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getFlowerArrangementsId>>,
+      TError,
+      TData
+    >;
+    axios?: AxiosRequestConfig;
+  }
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = getGetFlowerArrangementsIdQueryOptions(id, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const deleteFlowerArrangementsId = (
+  id: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.delete(`/flower-arrangements/${id}`, options);
+};
+
+export const getDeleteFlowerArrangementsIdMutationOptions = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteFlowerArrangementsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteFlowerArrangementsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteFlowerArrangementsId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return deleteFlowerArrangementsId(id, axiosOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteFlowerArrangementsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteFlowerArrangementsId>>
+>;
+
+export type DeleteFlowerArrangementsIdMutationError = AxiosError<unknown>;
+
+export const useDeleteFlowerArrangementsId = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteFlowerArrangementsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
+  const mutationOptions = getDeleteFlowerArrangementsIdMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+export const postFlowers = (
+  createFlowerRequest: CreateFlowerRequest,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.post(`/flowers`, createFlowerRequest, options);
+};
+
+export const getPostFlowersMutationOptions = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postFlowers>>,
+    TError,
+    { data: CreateFlowerRequest },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postFlowers>>,
+  TError,
+  { data: CreateFlowerRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postFlowers>>,
+    { data: CreateFlowerRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return postFlowers(data, axiosOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostFlowersMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postFlowers>>
+>;
+export type PostFlowersMutationBody = CreateFlowerRequest;
+export type PostFlowersMutationError = AxiosError<unknown>;
+
+export const usePostFlowers = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postFlowers>>,
+    TError,
+    { data: CreateFlowerRequest },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
+  const mutationOptions = getPostFlowersMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+export const deleteFlowersId = (
+  id: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.delete(`/flowers/${id}`, options);
+};
+
+export const getDeleteFlowersIdMutationOptions = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteFlowersId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteFlowersId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteFlowersId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return deleteFlowersId(id, axiosOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteFlowersIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteFlowersId>>
+>;
+
+export type DeleteFlowersIdMutationError = AxiosError<unknown>;
+
+export const useDeleteFlowersId = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteFlowersId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
+  const mutationOptions = getDeleteFlowersIdMutationOptions(options);
 
   return useMutation(mutationOptions);
 };

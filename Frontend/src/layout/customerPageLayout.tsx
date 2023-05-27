@@ -7,7 +7,7 @@ const CustomerPageLayout = (props: PropsWithChildren) => {
     <>
       <TopBar />
       <Center>
-        <Box width={'70%'} bgColor={'#aaaaaa'}>
+        <Box width={'70%'} bgColor={'#e8e8e8'} height={'100vh'}>
           {props.children}
         </Box>
       </Center>

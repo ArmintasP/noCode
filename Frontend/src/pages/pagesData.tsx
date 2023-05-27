@@ -1,4 +1,6 @@
+import ArrangementDetailPage from './ArrangementView/ArrangementDetailPage';
 import CustomerSignInPage from './Authentication/customerSignInPage';
+import CustomerSignUpPage from './Authentication/customerSignUpPage';
 import ErrorPage from './Error/errorPage';
 import HomePage from './Home/homePage';
 
@@ -18,6 +20,16 @@ const pagesData: routerType[] = [
     path: '/signin',
     element: <CustomerSignInPage />,
     title: 'Sign in',
+  },
+  {
+    path: '/signup',
+    element: <CustomerSignUpPage />,
+    title: 'Sign up',
+  },
+  {
+    path: '/details/:arrangementId',
+    element: <ArrangementDetailPage />,
+    title: 'Details',
   },
   {
     path: '*',

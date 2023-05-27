@@ -1,15 +1,15 @@
 import { AbsoluteCenter, Box, Button, Stack } from '@chakra-ui/react';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { usePostCustomersLogin } from '../../services/flower-shop';
-import useAuth from '../../hooks/useAuth';
 import CredentialForm from './credentialForm';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const CustomerSignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const { auth, setAuth, persist, setPersist } = useAuth();
+  const { user, login, logout } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -28,12 +28,13 @@ const CustomerSignInPage = () => {
         }).then((response) => {
           const responseToken: string = response.data.token;
           const responseEmail: string = response.data.email;
+          const responseId: string = response.data.id;
 
-          console.log(response);
-
-          console.log(responseToken);
-
-          setAuth({ token: responseToken, email: responseEmail });
+          login({
+            id: responseId,
+            email: responseEmail,
+            authToken: responseToken,
+          });
 
           navigate('/');
         });
@@ -41,7 +42,7 @@ const CustomerSignInPage = () => {
         console.error(err);
       }
     }
-  }, [email, loginIsLoading, loginMutateAsync, navigate, password, setAuth]);
+  }, [email, loginIsLoading, loginMutateAsync, navigate, password]);
 
   const handleEmailChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +76,9 @@ const CustomerSignInPage = () => {
           >
             Sign in
           </Button>
+          <Link to={'/signup'}>
+            <Button isDisabled={loginIsLoading}>Sign up</Button>
+          </Link>
         </Stack>
       </AbsoluteCenter>
     </Box>
