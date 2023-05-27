@@ -24,7 +24,7 @@ public sealed class CreateFlowerCommandHandler
 
         var flowerToCreate = new Flower(request.Name, request.ImageUrl);
 
-        var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, cancellationToken);
+        var createdFlower = await _flowerRepository.AddAsync(flowerToCreate, CancellationToken.None);
 
         return new CreateFlowerResult(createdFlower);
     }
