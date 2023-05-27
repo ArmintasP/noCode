@@ -44,18 +44,6 @@ public class CartsController : ApiController
             result => Ok(_mapper.Map<GetCartByCustomerIdResponse>(result)),
             errors => Problem(errors));
     }
-    /*
-    [HttpPost("")]
-    [AuthorizeRoles(UserRole.Customer)]
-    public async Task<IActionResult> Create(CreateCartRequest request)
-    {
-        var query = _mapper.Map<CreateCartCommand>(request);
-        var result = await _mediator.Send(query);
-
-        return result.Match(
-            result => Ok(_mapper.Map<CreateCartResponse>(result)),
-            errors => Problem(errors));
-    }*/
 
     [HttpDelete("{customerId}")]
     [AuthorizeRoles(UserRole.Customer)]
