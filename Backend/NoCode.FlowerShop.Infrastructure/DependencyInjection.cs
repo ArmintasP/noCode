@@ -36,7 +36,7 @@ public static class DependencyInjection
         var sqlConnectionString = configuration.GetValue<string>("SqlConnectionString");
 
         services.AddDbContext<FlowerShopDbContext>(options =>
-            options.UseSqlite(sqlConnectionString));
+            options.UseSqlServer(sqlConnectionString));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAdministratorRepository, AdministratorRepository>();

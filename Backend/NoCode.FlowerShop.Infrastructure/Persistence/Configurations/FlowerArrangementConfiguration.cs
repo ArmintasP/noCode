@@ -24,6 +24,7 @@ public class FlowerArrangementConfiguration : IEntityTypeConfiguration<FlowerArr
             .HasMaxLength(64);
 
         builder.Property(f => f.Price)
+            .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(f => f.StorageQuantity)

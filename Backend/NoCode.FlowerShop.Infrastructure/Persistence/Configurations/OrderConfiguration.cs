@@ -40,7 +40,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
             fb.Property(f => f.Quantity)
                 .IsRequired()
-                .HasConversion<uint>();
+                .HasConversion<int>();
         });
     }
 }
