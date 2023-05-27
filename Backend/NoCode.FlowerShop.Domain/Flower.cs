@@ -13,6 +13,16 @@ public sealed class Flower : Entity<Guid>
         ImageUrl = imageUrl;
     }
 
+    public void UpdateImageUrl(string imageUrl)
+    {
+        ImageUrl = imageUrl;
+    }
+
+    public void UpdateName(string name)
+    {
+        Name = name;
+    }
+
 #pragma warning disable CS8618
     private Flower() { }
 #pragma warning restore CS8618
