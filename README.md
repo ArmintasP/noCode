@@ -1,2 +1,2 @@
 # noCode
-noCode e-shopr repository
+noCode e-shop repository
