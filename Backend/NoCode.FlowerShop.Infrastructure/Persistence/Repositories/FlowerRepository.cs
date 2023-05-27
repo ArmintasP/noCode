@@ -41,10 +41,4 @@ public sealed class FlowerRepository : IFlowerRepository
         _dbContext.Update(flower);
         return _dbContext.SaveChangesAsync(token);
     }
-
-    public async Task DeleteByIdAsync(Flower flower, CancellationToken token = default)
-    {
-        _dbContext.Remove(flower);
-        await _dbContext.SaveChangesAsync(token);
-    }
 }

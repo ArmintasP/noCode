@@ -24,17 +24,20 @@ public static partial class ValidationExtensions
         });
     }
     
-    public static void ValidUrl<T>(this IRuleBuilder<T, string> ruleBuilder)
+    public static IRuleBuilderOptionsConditions<T, string> ValidUrl<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
-        ruleBuilder.Custom((url, context) =>
+        return ruleBuilder.Custom((url, context) =>
         {
-            var regex = UrlRegex();
+            const string pattern 
+                = @"^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$";
+
+            var regex = MyRegex();
 
             if (!regex.IsMatch(url)) 
                 context.AddFailure("The URL is not valid.");
-        });
+            });
     }
 
     [GeneratedRegex("^[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$")]
-    private static partial Regex UrlRegex();
+    private static partial Regex MyRegex();
 }

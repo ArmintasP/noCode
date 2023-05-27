@@ -18,12 +18,6 @@ public sealed class FlowerArrangementRepository : IFlowerArrangementRepository
         await _dbContext.SaveChangesAsync(token);
     }
 
-    public Task DeleteAsync(FlowerArrangement flowerArrangement, CancellationToken token = default)
-    {
-        _dbContext.Remove(flowerArrangement);
-        return _dbContext.SaveChangesAsync(token);
-    }
-
     public IQueryable<FlowerArrangement> GetAll()
     {
         return _dbContext.FlowerArrangements
