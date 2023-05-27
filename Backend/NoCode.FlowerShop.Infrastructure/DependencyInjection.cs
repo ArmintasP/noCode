@@ -14,6 +14,7 @@ using NoCode.FlowerShop.Infrastructure.Persistence.Repositories;
 using NoCode.FlowerShop.Infrastructure.Time;
 using System.Data;
 using System.Text;
+using NoCode.FlowerShop.Infrastructure.Authentication.HashingStrategies;
 
 namespace NoCode.FlowerShop.Infrastructure;
 
@@ -23,7 +24,9 @@ public static class DependencyInjection
     {
         services.AddPersistence(configuration);
         services.AddAuthentication(configuration);
-
+        
+        services.AddSingleton<IHashingStrategy, Pbkdf2HashingStrategy>(); 
+        
         services.Configure<PasswordProviderSettings>(configuration.GetSection("PasswordProviderSettings"));
         services.AddSingleton<IPasswordProvider, PasswordProvider>();
 
