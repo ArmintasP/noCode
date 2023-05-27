@@ -47,7 +47,7 @@ public class CartsController : ApiController
 
     [HttpDelete("{customerId}")]
     [AuthorizeRoles(UserRole.Customer)]
-    public async Task<IActionResult> Delete(Guid customerId)
+    public async Task<IActionResult> DeleteCart(Guid customerId)
     {
         var subjectIdString = GetClaimValue(ClaimTypes.NameIdentifier);
 
