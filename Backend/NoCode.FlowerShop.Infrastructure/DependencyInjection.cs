@@ -12,6 +12,7 @@ using NoCode.FlowerShop.Infrastructure.Authentication;
 using NoCode.FlowerShop.Infrastructure.Persistence;
 using NoCode.FlowerShop.Infrastructure.Persistence.Repositories;
 using NoCode.FlowerShop.Infrastructure.Time;
+using System.Data;
 using System.Text;
 
 namespace NoCode.FlowerShop.Infrastructure;
@@ -43,6 +44,8 @@ public static class DependencyInjection
         services.AddScoped<IFlowerArrangementRepository, FlowerArrangementRepository>();
         services.AddScoped<IFlowerArrangementCategoryRepository, FlowerArrangementCategoryRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
+        services.AddScoped<IDeliveryLocationRepository, DeliveryLocationRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
 
         return services;
     }
