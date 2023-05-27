@@ -1,4 +1,5 @@
 ﻿using NoCode.FlowerShop.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -8,6 +9,8 @@ public sealed class Customer : Entity<Guid>
     public string Password { get; private set; }
     public byte[] Salt { get; }
 
+    [Timestamp]
+    public byte[]? Version { get; private set; }
     public Customer(string email, string password, byte[] salt)
     {
         Email = email;

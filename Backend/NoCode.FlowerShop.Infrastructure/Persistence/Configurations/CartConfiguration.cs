@@ -30,5 +30,8 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
                 .IsRequired()
                 .HasConversion<int>();
         });
+
+        builder.Property(p => p.Version)
+             .IsRowVersion();
     }
 }

@@ -13,5 +13,9 @@ public static partial class Errors
         public static Error NotFound => Error.NotFound(
             code: "Flower.NotFound",
             description: "Can't find flower with matching properties.");
+        
+        public static Error OutdatedVersion => Error.Failure(
+            code: "Flower.Failure",
+            description: "Outdated flower information was given. Retry your action.");
     }
 }

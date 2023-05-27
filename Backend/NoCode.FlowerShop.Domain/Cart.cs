@@ -1,5 +1,6 @@
 ﻿using NoCode.FlowerShop.Domain.Common;
 using NoCode.FlowerShop.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -7,6 +8,9 @@ public sealed class Cart : Entity<Guid>
 {
     public Customer Customer { get; private set; }
     public List<FlowerArrangementPair> FlowerArrangements { get; private set; }
+
+    [Timestamp]
+    public byte[]? Version { get; private set; }
 
     public Cart(Customer customer, List<FlowerArrangementPair> flowerArrangements)
         : base(Guid.NewGuid())

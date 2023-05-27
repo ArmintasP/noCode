@@ -1,4 +1,5 @@
 ﻿using NoCode.FlowerShop.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoCode.FlowerShop.Domain;
 
@@ -7,6 +8,9 @@ public sealed class Administrator : Entity<Guid>
     public string Email { get; private set; }
     public string Password { get; private set; }
     public byte[] Salt { get; private set; }
+    
+    [Timestamp]
+    public byte[]? Version { get; private set; }
 
     public Administrator(Guid id, string email, string password, byte[] salt)
         : base(id)
