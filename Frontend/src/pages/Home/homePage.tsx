@@ -30,7 +30,7 @@ const HomePage = () => {
       (arrangements ?? []).map((arrangement) => (
         <Link to={'/details/' + arrangement.id}>
           <Card>
-            <Image src={arrangement.imageUrl} />
+            <Image src={arrangement.imageUrl} maxHeight={'250px'} />
             <CardHeader>
               <Flex>
                 <Text>{arrangement.name}</Text>

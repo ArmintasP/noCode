@@ -57,7 +57,7 @@ const TopBar = () => {
               <Stack>
                 <Image src={LotusIcon} height={'50px'} />
                 <Center>
-                  <Text fontSize={'2xl'}>White lotus flower shop</Text>
+                  <Text fontSize={'2xl'}>White lotus</Text>
                 </Center>
               </Stack>
             </Center>

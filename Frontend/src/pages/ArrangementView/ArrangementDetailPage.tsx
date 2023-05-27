@@ -15,6 +15,8 @@ import {
   Thead,
   Tr,
   Th,
+  Td,
+  Tbody,
 } from '@chakra-ui/react';
 import CustomerPageLayout from '../../layout/customerPageLayout';
 import { useMemo } from 'react';
@@ -29,6 +31,28 @@ const ArrangementDetailPage = () => {
   const arrangement: flowerArrangementType = useMemo(
     () => data?.data.flowerArrangement,
     [data?.data]
+  );
+
+  const flowers = useMemo(
+    () =>
+      arrangement?.flowers.map((flower) => (
+        <Tr>
+          <Td width={'90px'}>
+            <Image
+              src={flower.imageUrl}
+              borderRadius={'full'}
+              boxSize={'40px'}
+            />
+          </Td>
+          <Td>
+            <Text>{flower.name}</Text>
+          </Td>
+          <Td>
+            <Text align={'right'}>{flower.quantity}</Text>
+          </Td>
+        </Tr>
+      )),
+    [arrangement?.flowers]
   );
 
   if (isError) {
@@ -56,6 +80,11 @@ const ArrangementDetailPage = () => {
                     Home
                   </BreadcrumbLink>
                 </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink as={Link} to={'/'}>
+                    {arrangement.categoryName}
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
               </Breadcrumb>
               <Center>
                 <Image src={arrangement.imageUrl} />
@@ -69,10 +98,14 @@ const ArrangementDetailPage = () => {
               <Table>
                 <Thead>
                   <Tr>
+                    <Th></Th>
                     <Th>Flower name</Th>
-                    <Th>Quantity</Th>
+                    <Th>
+                      <Text align={'right'}>Quantity</Text>
+                    </Th>
                   </Tr>
                 </Thead>
+                <Tbody>{flowers}</Tbody>
               </Table>
             </Box>
           </SimpleGrid>
