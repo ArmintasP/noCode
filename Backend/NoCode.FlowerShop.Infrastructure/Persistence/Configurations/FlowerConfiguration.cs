@@ -29,5 +29,8 @@ public class FlowerConfiguration : IEntityTypeConfiguration<Flower>
 
         builder.HasIndex(f => f.Name)
             .IsUnique();
+
+        builder.Property(p => p.Version)
+            .IsRowVersion();
     }
 }
