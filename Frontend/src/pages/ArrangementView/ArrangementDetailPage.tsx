@@ -17,6 +17,8 @@ import {
   Th,
 } from '@chakra-ui/react';
 import CustomerPageLayout from '../../layout/customerPageLayout';
+import { useMemo } from 'react';
+import { flowerArrangementType } from '../../types/flowerArrangementType';
 
 const ArrangementDetailPage = () => {
   const { arrangementId } = useParams();
@@ -24,15 +26,22 @@ const ArrangementDetailPage = () => {
     arrangementId ?? ''
   );
 
-  // if (isError) {
-  //   console.error(error);
+  const arrangement: flowerArrangementType = useMemo(
+    () => data?.data.flowerArrangement,
+    [data?.data]
+  );
 
-  //   return <ErrorPage />;
-  // }
+  if (isError) {
+    console.error(error);
 
-  // if (isLoading || data === undefined) {
-  //   return <LoadingPage />;
-  // }
+    return <ErrorPage />;
+  }
+
+  if (isLoading || data === undefined) {
+    return <LoadingPage />;
+  }
+
+  console.log(arrangement);
 
   return (
     <CustomerPageLayout>
@@ -49,16 +58,13 @@ const ArrangementDetailPage = () => {
                 </BreadcrumbItem>
               </Breadcrumb>
               <Center>
-                <Image src="https://bit.ly/dan-abramov" />
+                <Image src={arrangement.imageUrl} />
               </Center>
             </Box>
             <Box>
-              <Text>FLOWER NAME</Text>
-              <Text align={'justify'}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                aliquam, dolor convallis condimentum tempus, eros nibh iaculis
-                mi, sed hendrerit tortor odio eget velit. Etiam quis quam in
-                nisl mollis sollicitudin quis vel tellus. Nam.
+              <Text>{arrangement.name}</Text>
+              <Text align={'justify'} minHeight={'100px'}>
+                {arrangement.description}
               </Text>
               <Table>
                 <Thead>

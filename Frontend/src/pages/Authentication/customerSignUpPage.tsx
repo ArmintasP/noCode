@@ -2,24 +2,30 @@ import { AbsoluteCenter, Box, Stack, Button } from '@chakra-ui/react';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { usePostCustomersRegister } from '../../services/flower-shop';
 import CredentialForm from './credentialForm';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerSignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const navigate = useNavigate();
 
   const {
-    mutate: loginMutate,
-    isLoading: loginIsLoading,
-    isError: loginIsError,
-    error: loginError,
+    mutateAsync: registerMutateAsync,
+    isLoading: registerIsLoading,
+    isError: registerIsError,
+    error: registerError,
   } = usePostCustomersRegister();
 
   const handleSignUpAttempt = useCallback(() => {
-    if (!loginIsLoading) {
-      loginMutate({ data: { email: email, password: password } });
+    if (!registerIsLoading) {
+      registerMutateAsync({ data: { email: email, password: password } }).then(
+        (response) => {
+          navigate('/signin');
+        }
+      );
     }
-  }, [email, loginIsLoading, loginMutate, password]);
+  }, [registerIsLoading, registerMutateAsync, email, password, navigate]);
 
   const handleEmailChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +42,8 @@ const CustomerSignUpPage = () => {
   );
 
   useEffect(() => {
-    console.log(loginError);
-  }, [loginError]);
+    console.log(registerError);
+  }, [registerError]);
 
   return (
     <Box width={'400px'} height={'600px'}>
@@ -51,7 +57,7 @@ const CustomerSignUpPage = () => {
             setValid={setIsValid}
           />
           <Button
-            isLoading={loginIsLoading}
+            isLoading={registerIsLoading}
             isDisabled={!isValid}
             onClick={handleSignUpAttempt}
           >
