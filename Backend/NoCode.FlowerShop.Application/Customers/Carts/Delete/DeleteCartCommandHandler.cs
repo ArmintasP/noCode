@@ -21,7 +21,7 @@ public class DeleteCartCommandHandler : IRequestHandler<DeleteCartCommand, Error
         if (cartToDelete is null)
             return Errors.Cart.NotFound;
 
-        await _cartRepository.DeleteByCustomerIdAsync(cartToDelete, cancellationToken);
+        await _cartRepository.DeleteAsync(cartToDelete, cancellationToken);
 
         return new DeleteCartResult();
     }

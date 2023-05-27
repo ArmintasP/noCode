@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Api.Attributes;
 using NoCode.FlowerShop.Application.Carts.Delete;
 using NoCode.FlowerShop.Application.Customers.Carts;
-using NoCode.FlowerShop.Application.Customers.Carts.Create;
 using NoCode.FlowerShop.Contracts.Cart;
 using NoCode.FlowerShop.Contracts.Customers.Cart;
 using NoCode.FlowerShop.Domain.Common;
@@ -13,7 +12,7 @@ using System.Security.Claims;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
-[Route("cart")]
+[Route("carts")]
 public class CartsController : ApiController
 {
     private readonly IMapper _mapper;

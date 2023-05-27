@@ -13,8 +13,10 @@ public sealed class CartMapping : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<GetCartByCustomerIdResult, GetCartByCustomerIdResponse>();
+
         config.NewConfig<Cart, CartSection>()
             .Map(dest => dest.CustomerId, src => src.Customer.Id);
+
         config.NewConfig<DeleteCartResult, DeleteCartResponse>();
     }
 }
