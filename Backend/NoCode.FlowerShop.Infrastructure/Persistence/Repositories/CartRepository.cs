@@ -33,4 +33,10 @@ public class CartRepository : ICartRepository
         _dbContext.Update(cart);
         return _dbContext.SaveChangesAsync(token);
     }
+
+    public async Task DeleteByCustomerIdAsync(Cart cart, CancellationToken token = default)
+    {
+        _dbContext.Remove(cart);
+        await _dbContext.SaveChangesAsync(token);
+    }
 }
