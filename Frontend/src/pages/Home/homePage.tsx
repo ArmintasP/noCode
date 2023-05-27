@@ -1,8 +1,11 @@
+import CustomerPageLayout from '../../layout/customerPageLayout';
+import { Text } from '@chakra-ui/react';
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <CustomerPageLayout>
+      <Text>YP</Text>
+    </CustomerPageLayout>
   );
 };
 

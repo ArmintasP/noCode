@@ -1,3 +1,4 @@
+import CustomerSignInPage from './Authentication/customerSignInPage';
 import ErrorPage from './Error/errorPage';
 import HomePage from './Home/homePage';
 
@@ -12,6 +13,11 @@ const pagesData: routerType[] = [
     path: '/',
     element: <HomePage />,
     title: 'Home',
+  },
+  {
+    path: '/signin',
+    element: <CustomerSignInPage />,
+    title: 'Sign in',
   },
   {
     path: '*',

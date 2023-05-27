@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 module.exports = {
+  root: true,
   env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
@@ -8,7 +9,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', "@typescript-eslint/eslint-plugin", "@typescript-eslint"],
   rules: {
     'react-refresh/only-export-components': 'warn',
   },
