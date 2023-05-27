@@ -2,5 +2,5 @@
 
 namespace NoCode.FlowerShop.Contracts.Customers.FlowerArrangements;
 
-public record AvailableFlowerArrangementsResponse (
+public record AvailableFlowerArrangementsResponse(
     List<FlowerArrangementSection> FlowerArrangements);

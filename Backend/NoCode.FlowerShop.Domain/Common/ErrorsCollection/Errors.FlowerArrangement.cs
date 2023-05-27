@@ -5,7 +5,7 @@ public static partial class Errors
 {
     public static class FlowerArrangement
     {
-        public static Error NotFound=> Error.Conflict(
+        public static Error NotFound => Error.Conflict(
             code: "FlowerArrangement.NotFound",
             description: "Flower arrangement does not exist.");
     }

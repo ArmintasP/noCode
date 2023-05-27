@@ -14,8 +14,8 @@ public sealed class AdministratorLoginQueryHandler : IRequestHandler<Administrat
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
     public AdministratorLoginQueryHandler(
-        IAdministratorRepository administratorRepository, 
-        IJwtTokenGenerator jwtTokenGenerator, 
+        IAdministratorRepository administratorRepository,
+        IJwtTokenGenerator jwtTokenGenerator,
         IPasswordProvider passwordProvider)
     {
         _administratorRepository = administratorRepository;
@@ -29,8 +29,8 @@ public sealed class AdministratorLoginQueryHandler : IRequestHandler<Administrat
 
         if (administrator is null)
             return Errors.Administrator.InvalidCredentials;
-        
-        if(IsCorrectPassword(request, administrator))
+
+        if (IsCorrectPassword(request, administrator))
             return Errors.Administrator.InvalidCredentials;
 
         var token = _jwtTokenGenerator.GenerateToken(administrator);

@@ -1,11 +1,12 @@
 ﻿using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Api.Attributes;
 using NoCode.FlowerShop.Application.Customers.Carts;
 using NoCode.FlowerShop.Contracts.Customers.Cart;
 using NoCode.FlowerShop.Domain.Common;
+using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
+using System.Security.Claims;
 
 namespace NoCode.FlowerShop.Api.Controllers;
 
@@ -21,10 +22,18 @@ public class CartsController : ApiController
         _mapper = mapper;
     }
 
-    [HttpGet("")]
+    [HttpGet("{customerId}")]
     [AuthorizeRoles(UserRole.Customer)]
     public async Task<IActionResult> GetCartByCustomerId(Guid customerId)
     {
+        var subjectIdString = GetClaimValue(ClaimTypes.NameIdentifier);
+
+        if (!Guid.TryParse(subjectIdString, out var subjectId))
+            return Problem(new() { Errors.Customer.Unauthorized });
+
+        if (subjectId != customerId)
+            return Problem(new() { Errors.Customer.Unauthorized });
+
         var query = new GetCartByCustomerIdQuery(customerId);
         var result = await _mediator.Send(query);
 

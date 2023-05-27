@@ -25,7 +25,7 @@ public sealed class FlowerArrangementRepository : IFlowerArrangementRepository
             .Include(f => f.Flowers)
             .ThenInclude(f => f.Flower);
     }
-    
+
     public Task<FlowerArrangement?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
         return _dbContext.FlowerArrangements

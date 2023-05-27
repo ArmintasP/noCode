@@ -22,5 +22,8 @@ public sealed class FlowerArrangementsMapping : IRegister
 
         config.NewConfig<GetFlowerArrangementByIdResult, GetFlowerArrangementByIdResponse>()
             .Map(dest => dest, src => src.FlowerArrangement);
+
+        config.NewConfig<FlowerArrangementPair, FlowerArrangementSection>()
+            .Map(dest => dest, src => src.FlowerArrangement);
     }
 }

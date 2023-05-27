@@ -7,7 +7,7 @@ public sealed class AdministratorLoginValidator : AbstractValidator<Administrato
     public AdministratorLoginValidator()
     {
         RuleFor(x => x.Email).EmailAddress();
-        
+
         RuleFor(x => x.Password).NotEmpty();
     }
 }

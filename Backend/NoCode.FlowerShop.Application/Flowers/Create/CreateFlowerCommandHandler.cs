@@ -6,7 +6,7 @@ using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
 namespace NoCode.FlowerShop.Application.Flowers.Create;
 
-public sealed class CreateFlowerCommandHandler 
+public sealed class CreateFlowerCommandHandler
     : IRequestHandler<CreateFlowerCommand, ErrorOr<CreateFlowerResult>>
 {
     private readonly IFlowerRepository _flowerRepository;

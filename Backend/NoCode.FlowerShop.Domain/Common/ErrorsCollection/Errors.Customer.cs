@@ -13,5 +13,9 @@ public static partial class Errors
         public static Error InvalidCredentials => Error.Conflict(
             code: "Authentication.InvalidCredentials",
             description: "Invalid email or password.");
+
+        public static Error Unauthorized => Error.Conflict(
+            code: "Customer.Unauthorized",
+            description: "Unauthorized access.");
     }
 }
