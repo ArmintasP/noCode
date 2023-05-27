@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ErrorOr;
+using Microsoft.EntityFrameworkCore;
 using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Domain;
+using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
 namespace NoCode.FlowerShop.Infrastructure.Persistence.Repositories;
 
@@ -36,10 +38,19 @@ public sealed class FlowerRepository : IFlowerRepository
         return _dbContext.Flowers.SingleOrDefaultAsync(f => f.Name == name, token);
     }
 
-    public Task UpdateAsync(Flower flower, CancellationToken token = default)
+    public async Task<ErrorOr<Flower>> UpdateAsync(Flower flower, CancellationToken token = default)
     {
-        _dbContext.Update(flower);
-        return _dbContext.SaveChangesAsync(token);
+        var updatedFlower = _dbContext.Update(flower);
+
+        try
+        {
+            await _dbContext.SaveChangesAsync(token);
+            return updatedFlower.Entity;
+        }
+        catch (DbUpdateConcurrencyException _)
+        {
+            return Errors.Flowers.OutdatedVersion;
+        }
     }
 
     public async Task DeleteByIdAsync(Flower flower, CancellationToken token = default)

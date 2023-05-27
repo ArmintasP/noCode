@@ -1,5 +1,5 @@
-using MediatR;
 using ErrorOr;
+using MediatR;
 using NoCode.FlowerShop.Application.Common.Interfaces.Persistence;
 using NoCode.FlowerShop.Domain.Common.ErrorsCollection;
 
@@ -24,11 +24,14 @@ public class UpdateFlowerCommandHandler : IRequestHandler<UpdateFlowerCommand, E
         var isUniqueName = await IsUniqueName(flower.Name, request.Name);
         if (!isUniqueName)
             return Errors.Flowers.DuplicateName;
-        
+
         flower.UpdateImageUrl(request.ImageUrl ?? flower.ImageUrl);
         flower.UpdateName(request.Name ?? flower.Name);
-        
-        await _flowerRepository.UpdateAsync(flower, cancellationToken);
+
+        var result = await _flowerRepository.UpdateAsync(flower, cancellationToken);
+
+        if (result.IsError)
+            return result.Errors;
 
         return new UpdateFlowerResult();
     }
@@ -37,10 +40,10 @@ public class UpdateFlowerCommandHandler : IRequestHandler<UpdateFlowerCommand, E
     {
         if (currentName == newName)
             return true;
-        
+
         if (newName is null)
             return true;
-        
+
         var flower = await _flowerRepository.GetByNameAsync(newName);
         return flower is null;
     }
