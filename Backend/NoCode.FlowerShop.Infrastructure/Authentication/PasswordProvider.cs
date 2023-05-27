@@ -7,9 +7,11 @@ namespace NoCode.FlowerShop.Infrastructure.Authentication;
 public sealed class PasswordProvider : IPasswordProvider
 {
     private readonly PasswordProviderSettings _settings;
+    private readonly IHashingStrategy _hashingStrategy;
 
-    public PasswordProvider(IOptions<PasswordProviderSettings> settings)
+    public PasswordProvider(IOptions<PasswordProviderSettings> settings, IHashingStrategy hashingStrategy)
     {
+        _hashingStrategy = hashingStrategy;
         _settings = settings.Value;
     }
 
@@ -20,28 +22,9 @@ public sealed class PasswordProvider : IPasswordProvider
             .Substring(0, 8);
     }
 
-    public (string hashedPassword, byte[] salt) HashPassword(string password)
-    {
-        var salt = RandomNumberGenerator.GetBytes(_settings.KeySize);
-        var hash = Rfc2898DeriveBytes.Pbkdf2(
-            password,
-            salt,
-            _settings.Iterations,
-            _settings.Algorithm,
-            _settings.KeySize);
+    public (string hashedPassword, byte[] salt) HashPassword(string password) 
+        => _hashingStrategy.HashPassword(password, _settings.KeySize, _settings.Iterations, _settings.Algorithm);
 
-        return (Convert.ToHexString(hash), salt);
-    }
-
-    public bool VerifyPassword(string password, string hash, byte[] salt)
-    {
-        var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(
-            password,
-            salt,
-            _settings.Iterations,
-             _settings.Algorithm,
-            _settings.KeySize);
-
-        return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
-    }
+    public bool VerifyPassword(string password, string hash, byte[] salt) 
+        => _hashingStrategy.VerifyPassword(password, hash, salt, _settings.KeySize, _settings.Iterations, _settings.Algorithm);
 }
