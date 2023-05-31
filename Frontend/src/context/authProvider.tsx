@@ -4,9 +4,10 @@ import { User } from '../hooks/useUser';
 
 const AuthProvider = (props: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
+  const [admin, setAdmin] = useState<User | null>(null);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, admin, setAdmin }}>
       {props.children}
     </AuthContext.Provider>
   );
