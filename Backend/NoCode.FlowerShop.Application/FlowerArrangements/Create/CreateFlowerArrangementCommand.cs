@@ -9,8 +9,8 @@ public sealed record CreateFlowerArrangementCommand(
     string ImageUrl,
     decimal Price,
     int StorageQuantity,
-    Flowers[] Flowers,
+    FlowersDto[] Flowers,
     Guid CategoryId)
     : IRequest<ErrorOr<CreateFlowerArrangementResult>>;
 
-public sealed record Flowers(Guid Id, int Quantity);
+public sealed record FlowersDto(Guid Id, int Quantity);

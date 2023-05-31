@@ -2,19 +2,23 @@
 using NoCode.FlowerShop.Application.Common.Behaviors;
 
 namespace NoCode.FlowerShop.Application.FlowerArrangements.Create;
+
 public sealed class CreateFlowerArrangementValidator : AbstractValidator<CreateFlowerArrangementCommand>
 {
     public CreateFlowerArrangementValidator()
     {
         RuleFor(x => x.Name)
-           .NotEmpty();
+           .NotEmpty()
+           .Length(64);
 
         RuleFor(x => x.Description)
-           .NotEmpty();
+           .NotEmpty()
+           .Length(256);
 
         RuleFor(x => x.ImageUrl)
+           .Length(256)
            .ValidUrl();
-
+           
         RuleFor(x => x.Price)
             .GreaterThanOrEqualTo(0);
 

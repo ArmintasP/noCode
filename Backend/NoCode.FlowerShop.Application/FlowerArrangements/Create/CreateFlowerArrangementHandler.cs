@@ -9,9 +9,7 @@ internal class CreateFlowerArrangementHandler :
     IRequestHandler<CreateFlowerArrangementCommand, ErrorOr<CreateFlowerArrangementResult>>
 {
     private readonly IFlowerArrangementRepository _flowerArrangementRepository;
-
     private readonly IFlowerArrangementCategoryRepository _flowerArrangementCategoryRepository;
-
     private readonly IFlowerRepository _flowerRepository;
 
     public CreateFlowerArrangementHandler(
@@ -34,7 +32,10 @@ internal class CreateFlowerArrangementHandler :
         if (category is null)
             return Errors.FlowerArrangement.CategoryNotFound;
 
-        var flowersIds = request.Flowers.Select(x => x.Id).ToList();
+        var flowersIds = request.Flowers
+            .Select(x => x.Id)
+            .ToList();
+        
         var flowers = _flowerRepository
             .GetAll()
             .Where(x => flowersIds.Contains(x.Id))

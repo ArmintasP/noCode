@@ -5,7 +5,7 @@ public sealed record CreateFlowerArrangementRequest(string Name,
     string ImageUrl,
     decimal Price,
     int StorageQuantity,
-    Flowers[] Flowers,
+    FlowersDto[] Flowers,
     Guid CategoryId);
 
-public sealed record Flowers(Guid Id, int Quantity);
+public sealed record FlowersDto(Guid Id, int Quantity);
