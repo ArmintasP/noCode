@@ -9,14 +9,14 @@ public sealed class CreateFlowerArrangementValidator : AbstractValidator<CreateF
     {
         RuleFor(x => x.Name)
            .NotEmpty()
-           .Length(64);
+           .MaximumLength(64);
 
         RuleFor(x => x.Description)
            .NotEmpty()
-           .Length(256);
+           .MaximumLength(256);
 
         RuleFor(x => x.ImageUrl)
-           .Length(256)
+           .MaximumLength(256)
            .ValidUrl();
            
         RuleFor(x => x.Price)
