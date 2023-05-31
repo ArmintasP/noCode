@@ -1,4 +1,6 @@
 ﻿using Mapster;
+using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
+using NoCode.FlowerShop.Application.FlowerArrangements.Create;
 using NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
 using NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
 using NoCode.FlowerShop.Contracts.Common;
@@ -17,10 +19,13 @@ public sealed class FlowerArrangementsMapping : IRegister
         config.NewConfig<FlowerArrangement, FlowerArrangementSection>()
             .Map(dest => dest.CategoryName, src => src.FlowerArrangementCategory.Name);
 
-        config.NewConfig<Flowers, FlowerSection>()
+        config.NewConfig<Domain.Flowers, FlowerSection>()
             .Map(dest => dest, src => src.Flower);
 
         config.NewConfig<GetFlowerArrangementByIdResult, GetFlowerArrangementByIdResponse>()
             .Map(dest => dest, src => src.FlowerArrangement);
+
+        config.NewConfig<CreateFlowerArrangementResult, CreateFlowerArrangementResponse>()
+            .Map(dest => dest.Id, src => src.FlowerArrangement.Id);
     }
 }

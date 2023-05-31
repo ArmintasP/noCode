@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NoCode.FlowerShop.Api.Attributes;
+using NoCode.FlowerShop.Application.FlowerArrangements.Create;
 using NoCode.FlowerShop.Application.FlowerArrangements.Delete;
 using NoCode.FlowerShop.Application.FlowerArrangements.GetAvailableFlowerArragementsList;
 using NoCode.FlowerShop.Application.FlowerArrangements.GetFlowerArrangementById;
@@ -56,6 +57,19 @@ public class FlowerArrangementsController : ApiController
 
         return result.Match(
             result => NoContent(),
+            errors => Problem(errors));
+    }
+
+    [HttpPost("")]
+    [AuthorizeRoles(UserRole.Administrator)]
+    public async Task<IActionResult> CreateFlowerArrangement
+        (CreateFlowerArrangementRequest request)
+    {
+        var command = _mapper.Map<CreateFlowerArrangementCommand>(request);
+        var result = await _mediator.Send(command);
+
+        return result.Match(
+            result => Ok(_mapper.Map<CreateFlowerArrangementResponse>(result)),
             errors => Problem(errors));
     }
 }
