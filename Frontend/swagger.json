@@ -159,6 +159,40 @@
         }
       }
     },
+    "/flower-arrangements": {
+      "post": {
+        "tags": ["FlowerArrangements"],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFlowerArrangementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFlowerArrangementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFlowerArrangementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFlowerArrangementRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/flowers": {
       "post": {
         "tags": ["Flowers"],
@@ -294,6 +328,43 @@
         },
         "additionalProperties": false
       },
+      "CreateFlowerArrangementRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "storageQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flowers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FlowersDto"
+            },
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateFlowerRequest": {
         "type": "object",
         "properties": {
@@ -332,6 +403,20 @@
           "password": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FlowersDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

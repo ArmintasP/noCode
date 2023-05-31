@@ -20,6 +20,11 @@ export interface UpdateFlowerRequest {
   imageUrl?: string | null;
 }
 
+export interface FlowersDto {
+  id?: string;
+  quantity?: number;
+}
+
 export interface CustomerRegisterRequest {
   email?: string | null;
   password?: string | null;
@@ -33,6 +38,16 @@ export interface CustomerLoginRequest {
 export interface CreateFlowerRequest {
   name?: string | null;
   imageUrl?: string | null;
+}
+
+export interface CreateFlowerArrangementRequest {
+  name?: string | null;
+  description?: string | null;
+  imageUrl?: string | null;
+  price?: number;
+  storageQuantity?: number;
+  flowers?: FlowersDto[] | null;
+  categoryId?: string;
 }
 
 export interface AdministratorLoginRequest {
@@ -426,6 +441,71 @@ export const useDeleteFlowerArrangementsId = <
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getDeleteFlowerArrangementsIdMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+export const postFlowerArrangements = (
+  createFlowerArrangementRequest: CreateFlowerArrangementRequest,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.default.post(
+    `/flower-arrangements`,
+    createFlowerArrangementRequest,
+    options
+  );
+};
+
+export const getPostFlowerArrangementsMutationOptions = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postFlowerArrangements>>,
+    TError,
+    { data: CreateFlowerArrangementRequest },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postFlowerArrangements>>,
+  TError,
+  { data: CreateFlowerArrangementRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postFlowerArrangements>>,
+    { data: CreateFlowerArrangementRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return postFlowerArrangements(data, axiosOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostFlowerArrangementsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postFlowerArrangements>>
+>;
+export type PostFlowerArrangementsMutationBody = CreateFlowerArrangementRequest;
+export type PostFlowerArrangementsMutationError = AxiosError<unknown>;
+
+export const usePostFlowerArrangements = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postFlowerArrangements>>,
+    TError,
+    { data: CreateFlowerArrangementRequest },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
+  const mutationOptions = getPostFlowerArrangementsMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
