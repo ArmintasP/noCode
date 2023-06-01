@@ -25,9 +25,6 @@ public sealed class CreateFlowerArrangementValidator : AbstractValidator<CreateF
         RuleFor(x => x.StorageQuantity)
             .GreaterThanOrEqualTo(0);
 
-        RuleFor(x => x.CategoryId)
-            .NotNull();
-
         RuleFor(x => x.Flowers)
             .NotEmpty();
 
