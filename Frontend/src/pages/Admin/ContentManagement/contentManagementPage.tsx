@@ -102,9 +102,9 @@ const ContentManagementPage = ({
 
   const deleteFlowers = useCallback(
     (indexes: Array<number>) => {
-      indexes.forEach(
-        async (index) => await deleteFlowerAsync({ id: flowers[index].id })
-      );
+      const ids = indexes.map((idx) => flowers[idx].id);
+
+      ids.forEach(async (id) => await deleteFlowerAsync({ id: id }));
 
       window.location.reload();
     },
@@ -113,10 +113,9 @@ const ContentManagementPage = ({
 
   const deleteArrangements = useCallback(
     (indexes: Array<number>) => {
-      indexes.forEach(
-        async (index) =>
-          await deleteArrangementAsync({ id: arrangements[index].id })
-      );
+      const ids = indexes.map((idx) => arrangements[idx].id);
+
+      ids.forEach(async (id) => await deleteArrangementAsync({ id: id }));
 
       window.location.reload();
     },
@@ -146,8 +145,11 @@ const ContentManagementPage = ({
             id: flower.id,
             quantity: flower.quantity,
           })),
+          storageQuantity: 1,
         },
       });
+
+      window.location.reload();
     },
     [createArrangementAsync]
   );
@@ -171,6 +173,8 @@ const ContentManagementPage = ({
   }, [setSelectedArrangement]);
 
   const viewer = useMemo(() => {
+    console.log(`Selected: ${selected}`);
+
     if (selected === null) {
       return null;
     }
@@ -216,7 +220,7 @@ const ContentManagementPage = ({
         <Button onClick={logout}>Sign out</Button>
       </Box>
       <Flex>
-        <Box width={'300px'}>
+        <Box width={'350px'}>
           <ContentList
             tableHeaders={['Name']}
             tableData={flowerTableData}
@@ -228,7 +232,7 @@ const ContentManagementPage = ({
           />
         </Box>
         <Box width={'20px'} />
-        <Box width={'300px'}>
+        <Box width={'350px'}>
           <ContentList
             tableHeaders={['Name']}
             tableData={arrangementTableData}

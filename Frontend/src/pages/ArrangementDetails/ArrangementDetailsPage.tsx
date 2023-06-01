@@ -81,17 +81,16 @@ const ArrangementDetailPage = () => {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
-                  <BreadcrumbLink as={Link} to={'/'}>
-                    {arrangement.categoryName}
-                  </BreadcrumbLink>
+                  <Text>{arrangement.name}</Text>
                 </BreadcrumbItem>
               </Breadcrumb>
+              <Box height={'20px'} />
               <Center>
                 <Image src={arrangement.imageUrl} />
               </Center>
             </Box>
             <Box>
-              <Text>{arrangement.name}</Text>
+              <Text fontSize={'4xl'}>{arrangement.name}</Text>
               <Text align={'justify'} minHeight={'100px'}>
                 {arrangement.description}
               </Text>

@@ -57,7 +57,7 @@ const SelectableTable = ({
 
   const parentCheckbox = useMemo(() => {
     return (
-      <Td>
+      <Th>
         <Checkbox
           isChecked={allChecked}
           onChange={(e) => {
@@ -65,7 +65,7 @@ const SelectableTable = ({
             setCheckedItems(Array((rows ?? []).length).fill(e.target.checked));
           }}
         />
-      </Td>
+      </Th>
     );
   }, [allChecked, rows]);
 
@@ -102,6 +102,7 @@ const SelectableTable = ({
 
       return (
         <Tr
+          key={idx}
           onClick={(e) => {
             if (setSelected !== undefined) {
               setSelected(idx);
@@ -117,7 +118,7 @@ const SelectableTable = ({
     });
 
     return <Tbody>{tableRows}</Tbody>;
-  }, [checkedItems, rows]);
+  }, [checkedItems, rows, setSelected]);
 
   return (
     <TableContainer>

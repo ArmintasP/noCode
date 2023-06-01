@@ -35,8 +35,12 @@ const ArrangementViewer = ({
     setImageUrl(arrangement.imageUrl);
     setDescription(arrangement.description);
     setPrice(arrangement.price);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    arrangement.description,
+    arrangement.imageUrl,
+    arrangement.name,
+    arrangement.price,
+  ]);
 
   useEffect(() => {
     if (setArrangement !== undefined) {
@@ -93,8 +97,6 @@ const ArrangementViewer = ({
         value={imageUrl}
         onChange={(e) => setImageUrl(e.target.value)}
       />
-      <FormLabel>Category</FormLabel>
-      <Input isDisabled={true} value={arrangement.categoryName} />
       <FormLabel>Price</FormLabel>
       <NumberInput
         min={0}
