@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { User } from "./useUser";
 import { useLocalStorage } from "./useLocalStorage";
 import { useAdminUser } from "./useAdminUser";
@@ -14,13 +14,13 @@ export const useAdminAuth = () => {
     }
   }, [addAdmin, getItem]);
 
-  const login = (user: User) => {
+  const login = useCallback((user: User) => {
     addAdmin(user);
-  };
+  }, [addAdmin]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     removeAdmin();
-  };
+  }, [removeAdmin]);
 
   return { admin, login, logout };
 };

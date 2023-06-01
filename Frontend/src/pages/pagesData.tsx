@@ -1,4 +1,5 @@
-import ArrangementDetailPage from './ArrangementView/ArrangementDetailPage';
+import AdminPage from './Admin/adminPage';
+import ArrangementDetailPage from './ArrangementDetails/ArrangementDetailsPage';
 import CustomerSignInPage from './Authentication/customerSignInPage';
 import CustomerSignUpPage from './Authentication/customerSignUpPage';
 import ErrorPage from './Error/errorPage';
@@ -30,6 +31,11 @@ const pagesData: routerType[] = [
     path: '/details/:arrangementId',
     element: <ArrangementDetailPage />,
     title: 'Details',
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />,
+    title: 'Admin',
   },
   {
     path: '*',

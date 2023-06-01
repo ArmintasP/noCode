@@ -2,14 +2,14 @@ import { AbsoluteCenter, Box, Button, Stack } from '@chakra-ui/react';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { usePostAdministratorsLogin } from '../../services/flower-shop';
 import CredentialForm from './credentialForm';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { useAdminAuth } from '../../hooks/useAdminAuth';
 
 const AdminSignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const { user, login, logout } = useAuth();
+  const { login } = useAdminAuth();
   const navigate = useNavigate();
 
   const {
@@ -35,14 +35,12 @@ const AdminSignInPage = () => {
             email: responseEmail,
             authToken: responseToken,
           });
-
-          navigate('/');
         });
       } catch (err) {
         console.error(err);
       }
     }
-  }, [email, login, loginIsLoading, loginMutateAsync, navigate, password]);
+  }, [email, login, loginIsLoading, loginMutateAsync, password]);
 
   const handleEmailChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

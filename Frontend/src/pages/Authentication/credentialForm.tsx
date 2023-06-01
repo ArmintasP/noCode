@@ -6,7 +6,7 @@ import {
   InputRightElement,
   Button,
 } from '@chakra-ui/react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { ChangeEventHandler, useEffect } from 'react';
 
 const PasswordInput = ({
@@ -17,7 +17,7 @@ const PasswordInput = ({
   handleChange: ChangeEventHandler;
 }) => {
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+  const handleClick = useCallback(() => setShow(!show), [show]);
 
   return (
     <InputGroup size="md">
@@ -37,36 +37,6 @@ const PasswordInput = ({
   );
 };
 
-const ValidatePassword = (password: string) => {
-  let isValid = true;
-  let message = '';
-
-  if (password.length == 0) {
-    isValid = false;
-  } else if (password.length < 5) {
-    isValid = false;
-    message = 'Password is too short';
-  }
-
-  return { isValid, message };
-};
-
-const ValidateEmail = (email: string) => {
-  const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
-  let isValid = true;
-  let message = '';
-
-  if (email.length == 0) {
-    isValid = false;
-  } else {
-    isValid = pattern.test(email);
-    message = isValid ? '' : 'Invalid email';
-  }
-
-  return { isValid, message };
-};
-
 type CredentialFormProps = {
   emailValue: string;
   handleEmailChange: ChangeEventHandler;
@@ -81,19 +51,52 @@ const CredentialForm = (props: CredentialFormProps) => {
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [emailValidMessage, setEmailValidMessage] = useState('');
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const ValidatePassword = useCallback((password: string) => {
+    let isValid = true;
+    let message = '';
+
+    if (password.length == 0) {
+      isValid = false;
+    } else if (password.length < 5) {
+      isValid = false;
+      message = 'Password is too short';
+    }
+
+    return { isValid, message };
+  }, []);
+
+  const ValidateEmail = useCallback((email: string) => {
+    const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+    let isValid = true;
+    let message = '';
+
+    if (email.length == 0) {
+      isValid = false;
+    } else {
+      isValid = pattern.test(email);
+      message = isValid ? '' : 'Invalid email';
+    }
+
+    return { isValid, message };
+  }, []);
+
   useEffect(() => {
-    const { isValid, message } = ValidatePassword(props.passwordValue);
+    const { isValid, message } = ValidatePassword(password);
 
     setPasswordIsValid(isValid);
     setPasswordValidMessage(message);
-  }, [props.passwordValue]);
+  }, [ValidatePassword, password]);
 
   useEffect(() => {
-    const { isValid, message } = ValidateEmail(props.emailValue);
+    const { isValid, message } = ValidateEmail(email);
 
     setEmailIsValid(isValid);
     setEmailValidMessage(message);
-  }, [props.emailValue]);
+  }, [ValidateEmail, email]);
 
   useEffect(
     () => props.setValid(passwordIsValid && emailIsValid),
@@ -104,15 +107,21 @@ const CredentialForm = (props: CredentialFormProps) => {
     <Stack>
       <Text>Email</Text>
       <Input
-        value={props.emailValue}
-        onChange={props.handleEmailChange}
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          props.handleEmailChange(e);
+        }}
         placeholder="name.surname@email.com"
       />
       <Text hidden={emailIsValid}>{emailValidMessage}</Text>
       <Text>Password</Text>
       <PasswordInput
-        value={props.passwordValue}
-        handleChange={props.handlePasswordChange}
+        value={password}
+        handleChange={(e) => {
+          setPassword(e.target.value);
+          props.handlePasswordChange(e);
+        }}
       />
       <Text hidden={passwordIsValid}>{passwordValidMessage}</Text>
     </Stack>
