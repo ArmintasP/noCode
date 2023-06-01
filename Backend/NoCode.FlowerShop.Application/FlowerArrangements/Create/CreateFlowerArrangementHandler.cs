@@ -28,9 +28,9 @@ internal class CreateFlowerArrangementHandler :
         if (flowerArrangement is not null)
             return Errors.FlowerArrangement.DuplicateName;
 
-        var category = await _flowerArrangementCategoryRepository.GetById(request.CategoryId, cancellationToken);
-        if (category is null)
-            return Errors.FlowerArrangement.CategoryNotFound;
+        var category = _flowerArrangementCategoryRepository
+            .GetAll()
+            .First();
 
         var flowersIds = request.Flowers
             .Select(x => x.Id)
